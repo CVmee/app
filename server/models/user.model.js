@@ -9,7 +9,6 @@ const userSchema = new Schema({
     phone: String,
     profilePicture: String,
     profileDescription: String,
-    skills: [String],
 }, {
     timestamps: true
 })

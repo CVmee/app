@@ -11,7 +11,7 @@ module.exports = app => {
     app.use(session({
         secret: "passport-app-webmad0320",
         resave: true,
-        saveUninitialized: true
+        saveUninitialized: true,
     }))
 
     passport.serializeUser((user, next) => next(null, user._id))
@@ -21,18 +21,23 @@ module.exports = app => {
             .catch(err => next(err))
     })
 
-
-
+    
     app.use(flash())
 
-    passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
-        User.findOne({ username })
+
+    passport.use(new LocalStrategy({
+        passReqToCallback: true,
+        usernameField: 'email',
+        passwordField: 'password'
+    },
+        (req, email, password, next) => {
+        User.findOne({ email })
             .then(user => {
                 if (!user) {
-                    return next(null, false, { message: "Nombre de usuario incorrecto" })
+                    return next(null, false, { message: "Wrong e-mail" })
                 }
                 if (!bcrypt.compareSync(password, user.password)) {
-                    return next(null, false, { message: "Contraseña incorrecta" })
+                    return next(null, false, { message: "wrong password" })
                 }
                 return next(null, user)
             })

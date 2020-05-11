@@ -7,12 +7,15 @@ const bcrypt = require("bcrypt")
 
 router.post('/signup', (req, res, next) => {
 
-    const username = req.body.username;
+    console.log(req.user)
+    console.log('ENTRA EN SIGNUP')
+
+    const email = req.body.email;
     const password = req.body.password;
 
 
-    if (!username || !password) {
-        res.status(400).json({ message: 'Provide username and password' });
+    if (!email || !password) {
+        res.status(400).json({ message: 'Provide email and password' });
         return;
     }
 
@@ -21,15 +24,15 @@ router.post('/signup', (req, res, next) => {
         return;
     }
 
-    User.findOne({ username }, (err, foundUser) => {
+    User.findOne({ email }, (err, foundUser) => {
 
         if (err) {
-            res.status(500).json({ message: "Username check went bad." });
+            res.status(500).json({ message: "email check went bad." });
             return;
         }
 
         if (foundUser) {
-            res.status(400).json({ message: 'Username taken. Choose another one.' });
+            res.status(400).json({ message: 'email taken. Choose another one.' });
             return;
         }
 
@@ -37,7 +40,7 @@ router.post('/signup', (req, res, next) => {
         const hashPass = bcrypt.hashSync(password, salt);
 
         const aNewUser = new User({
-            username: username,
+            email: email,
             password: hashPass
         });
 
@@ -50,12 +53,10 @@ router.post('/signup', (req, res, next) => {
             // Automatically log in user after sign up
             // .login() here is actually predefined passport method
             req.login(aNewUser, (err) => {
-
                 if (err) {
                     res.status(500).json({ message: 'Login after signup went bad.' });
                     return;
                 }
-
                 // Send the user's information to the frontend
                 // We can use also: res.status(200).json(req.user);
                 res.status(200).json(aNewUser);
@@ -65,6 +66,7 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
+
     passport.authenticate('local', (err, theUser, failureDetails) => {
         if (err) {
             res.status(500).json({ message: 'Something went wrong authenticating user' });
@@ -84,7 +86,6 @@ router.post('/login', (req, res, next) => {
                 res.status(500).json({ message: 'Session save went bad.' });
                 return;
             }
-
             // We are now logged in (that's why we can also send req.user)
             res.status(200).json(theUser);
         });
