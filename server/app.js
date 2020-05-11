@@ -18,6 +18,5 @@ require('./configs/locals.config')(app)
 
 // Base URLS
 app.use('/api', require('./routes/auth.routes'))
-app.use('/api', require('./routes/coaster.routes'))
 
 module.exports = app
