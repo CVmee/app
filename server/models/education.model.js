@@ -8,9 +8,9 @@ const educationSchema = new Schema({
     end: String,
     city: String,
     description: String,
-    user: {
+    cv: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'CV'
     }
 }, {
     timestamps: true

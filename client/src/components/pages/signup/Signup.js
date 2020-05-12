@@ -16,7 +16,7 @@ class Signup extends Component {
         super(props)
         this.state = {
             loginInfo: {
-                username: '',
+                email: '',
                 password: ''
             },
             errorMessage: ''
@@ -47,7 +47,6 @@ class Signup extends Component {
     }
 
 
-
     render() {
 
         return (
@@ -56,17 +55,17 @@ class Signup extends Component {
                 <Row>
                     <Col md={{ span: 4, offset: 4 }}>
 
-                        <h3>Registro de usuario</h3>
+                        <h3>Sign Up</h3>
                         <hr></hr>
                         <Form onSubmit={this.handleSubmit}>
 
                             <Form.Group controlId="name">
-                                <Form.Label>Usuario</Form.Label>
-                                <Form.Control name="username" type="text" value={this.state.username} onChange={this.handleInputChange} />
+                                <Form.Label>E-mail</Form.Label>
+                                <Form.Control name="email" type="text" value={this.state.email} onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group controlId="pwd">
-                                <Form.Label>Contraseña</Form.Label>
+                                <Form.Label>Password</Form.Label>
                                 <Form.Control name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
                             </Form.Group>
 
@@ -75,10 +74,10 @@ class Signup extends Component {
                                 style={{ display: this.state.errorMessage ? 'block' : 'none' }}
                             >{this.state.errorMessage}</p>
 
-                            <Button variant="dark" type="submit">Registrarme</Button>
+                            <Button variant="dark" type="submit">Sign Up</Button>
                         </Form>
 
-                        <p><small>¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link></small></p>
+                        <p><small>Already have an account? <Link to="/login">Log In</Link></small></p>
 
                     </Col>
                 </Row>

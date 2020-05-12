@@ -7,9 +7,6 @@ const bcrypt = require("bcrypt")
 
 router.post('/signup', (req, res, next) => {
 
-    console.log(req.user)
-    console.log('ENTRA EN SIGNUP')
-
     const email = req.body.email;
     const password = req.body.password;
 
@@ -87,6 +84,7 @@ router.post('/login', (req, res, next) => {
                 return;
             }
             // We are now logged in (that's why we can also send req.user)
+
             res.status(200).json(theUser);
         });
     })(req, res, next);

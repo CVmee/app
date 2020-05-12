@@ -6,6 +6,7 @@ const Employment = require('../models/employment.model')
 const Education = require('../models/education.model')
 const Link = require('../models/link.model')
 const CV = require('../models/cv.model')
+const Template = require('../models/template.model')
 
 //mongoose.connect(`mongodb+srv://${process.env.MONGODBUSER}:${process.env.MONGODBPASSWORD}@damagesound-t1udi.gcp.mongodb.net/${process.env.DB}`, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connect(`mongodb://localhost/${process.env.DB}`, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -45,118 +46,192 @@ const createCVs = (userID) => {
         {
             name: 'Apollo',
             skills: ["HTML", "CSS", "JavaScript", "ES6", "React", "Node.js", "Express", "MongoDB"],
+            employment: employment,
+            education: education,
+            links: links,
             user: userID
         },
         {
             name: "Poseidon",
             skills: ["Yoga", "Flexbility", "Mindfullness", "Meditation"],
+            employment: employment,
+            education: education,
+            links: links,
             user: userID
         },
         {
             name: "Hermes",
             skills: [],
+            employment: employment,
+            education: education,
+            links: links,
             user: userID
         }
     )
 }
 
-const employment = []
+const employment = [
+    {
+        title: "Marketing Consultant",
+        employer: "Neointec",
+        start: "Jan-2019",
+        end: "May-2020",
+        city: "Alicante",
+        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat, dolor alias. Officia architecto facere voluptates ullam dolore magnam inventore obcaecati earum nostrum, odit hic dolores distinctio sunt corrupti delectus modi.",
+    },
+    {
+        title: "Yoga Instructor",
+        employer: "Gavin Belson",
+        start: "Jan-2019",
+        end: "Current",
+        city: "Alicante",
+        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat, dolor alias. Officia architecto facere voluptates ullam dolore magnam inventore obcaecati earum nostrum, odit hic dolores distinctio sunt corrupti delectus modi.",
+    },
+]
 
-const createEmployment = (cvID) => {
+// const createEmployment = () => {
 
-    employment.push(
-        {
-            title: "Marketing Consultant",
-            employer: "Neointec",
-            start: "Jan-2019",
-            end: "May-2020",
-            city: "Alicante",
-            description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat, dolor alias. Officia architecto facere voluptates ullam dolore magnam inventore obcaecati earum nostrum, odit hic dolores distinctio sunt corrupti delectus modi.",
-            user: cvID
-        },
-        {
-            title: "Yoga Instructor",
-            employer: "Gavin Belson",
-            start: "Jan-2019",
-            end: "Current",
-            city: "Alicante",
-            description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat, dolor alias. Officia architecto facere voluptates ullam dolore magnam inventore obcaecati earum nostrum, odit hic dolores distinctio sunt corrupti delectus modi.",
-            user: cvID
-        },
-    )
-}
-
-
-const education = []
-
-const createEducation = (cvID) => {
-
-    education.push(
-        {
-            degree: "Marketing",
-            school: "King Juan Carlos University",
-            start: "2014",
-            end: "2018",
-            city: "Madrid",
-            description: "Just a description",
-            user: cvID
-        },
-        {
-            degree: "Webdev",
-            school: "IronHack",
-            start: "2020",
-            end: "2020",
-            city: "Madrid",
-            description: "Just a description 2",
-            user: cvID
-        },
-        {
-            degree: "Mindfulness",
-            school: "Life",
-            start: "2014",
-            end: "2018",
-            city: "Madrid",
-            description: "Just a description 3",
-            user: cvID
-        },
-    )
-}
+//     employment.push(
+//         {
+//             title: "Marketing Consultant",
+//             employer: "Neointec",
+//             start: "Jan-2019",
+//             end: "May-2020",
+//             city: "Alicante",
+//             description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat, dolor alias. Officia architecto facere voluptates ullam dolore magnam inventore obcaecati earum nostrum, odit hic dolores distinctio sunt corrupti delectus modi.",
+//         },
+//         {
+//             title: "Yoga Instructor",
+//             employer: "Gavin Belson",
+//             start: "Jan-2019",
+//             end: "Current",
+//             city: "Alicante",
+//             description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat, dolor alias. Officia architecto facere voluptates ullam dolore magnam inventore obcaecati earum nostrum, odit hic dolores distinctio sunt corrupti delectus modi.",
+//         },
+//     )
+// }
 
 
-const links = []
+const education = [
+    {
+        degree: "Marketing",
+        school: "King Juan Carlos University",
+        start: "2014",
+        end: "2018",
+        city: "Madrid",
+        description: "Just a description",
+    },
+    {
+        degree: "Webdev",
+        school: "IronHack",
+        start: "2020",
+        end: "2020",
+        city: "Madrid",
+        description: "Just a description 2",
+    },
+    {
+        degree: "Mindfulness",
+        school: "Life",
+        start: "2014",
+        end: "2018",
+        city: "Madrid",
+        description: "Just a description 3",
+    },
+]
 
-const createLinks = (cvID) => {
+// const createEducation = () => {
 
-    links.push(
+//     education.push(
+//         {
+//             degree: "Marketing",
+//             school: "King Juan Carlos University",
+//             start: "2014",
+//             end: "2018",
+//             city: "Madrid",
+//             description: "Just a description",
+//         },
+//         {
+//             degree: "Webdev",
+//             school: "IronHack",
+//             start: "2020",
+//             end: "2020",
+//             city: "Madrid",
+//             description: "Just a description 2",
+//         },
+//         {
+//             degree: "Mindfulness",
+//             school: "Life",
+//             start: "2014",
+//             end: "2018",
+//             city: "Madrid",
+//             description: "Just a description 3",
+//         },
+//     )
+// }
 
-        {
-            label: "Prject 1",
-            link: "https://theuselessweb.com/",
-            user: cvID
-        },
-        {
-            label: "Project 2",
-            link: "https://heeeeeeeey.com/",
-            user: cvID
-        }
-    )
-}
+
+const links = [
+    {
+        label: "Prject 1",
+        link: "https://theuselessweb.com/",
+    },
+    {
+        label: "Project 2",
+        link: "https://heeeeeeeey.com/",
+    }
+]
+
+// const createLinks = () => {
+
+//     links.push(
+
+//         {
+//             label: "Prject 1",
+//             link: "https://theuselessweb.com/",
+//         },
+//         {
+//             label: "Project 2",
+//             link: "https://heeeeeeeey.com/",
+//         }
+//     )
+// }
+
+const templates = [
+    {
+        name: "Apollo"
+    },
+    {
+        name: "Hermes"
+    },
+    {
+        name: "Poseidon"
+    },
+    {
+        name: "Zeus"
+    },
+    {
+        name: "Aphodite"
+    },
+
+
+]
 
 
 
 User.create(users)
     .then(allUsers => allUsers.forEach(user => createCVs(user.id)))
     .then(() => CV.create(cvs))
-    .then(allCVs => {
-        allCVs.forEach(cv => {
-            createEmployment(cv.id)
-            createEducation(cv.id)
-            createLinks(cv.id)
-        })
-    })
-    .then(() => Employment.create(employment))
-    .then(() => Education.create(education))
-    .then(() => Link.create(links))
+    // .then(allCVs => {
+    //     allCVs.forEach(cv => {
+    //         createEmployment(cv.id)
+    //         createEducation(cv.id)
+    //         createLinks(cv.id)
+    //     })
+    // })
+    // .then(() => Employment.create(employment))
+    // .then(() => Education.create(education))
+    // .then(() => Link.create(links))
+    .then(() => Template.create(templates))
     .then(() => {
         console.log('Ya se ha creado')
         mongoose.connection.close()

@@ -4,9 +4,9 @@ const Schema = mongoose.Schema
 const linkSchema = new Schema({
     label: String,
     link: String,
-    user: {
+    cv: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'CV'
     }
 }, {
     timestamps: true
