@@ -7,6 +7,16 @@ const cvSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    userInfo: {
+        firstName: String,
+        lastName: String,
+        title: String,
+        email: String,
+        password: String,
+        phone: String,
+        profilePicture: String,
+        profileDescription: String,
+    },
     employment: [{
         title: String,
         employer: String,

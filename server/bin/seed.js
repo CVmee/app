@@ -21,6 +21,7 @@ const users = [
     {
         firstName: "Gerardo",
         lastName: "Toledo",
+        title: "Software Developer",
         email: "a@a.com",
         password: bcrypt.hashSync('pass1', salt),
         phone: "123456789",
@@ -30,6 +31,7 @@ const users = [
     {
         firstName: "Demo 1",
         lastName: "Demo 2",
+        title: "Yoga Instructor",
         email: "b@b.com",
         password: bcrypt.hashSync('pass2', salt),
         phone: "987654321",
@@ -40,7 +42,7 @@ const users = [
 
 const cvs = []
 
-const createCVs = (userID) => {
+const createCVs = (user) => {
 
     cvs.push(
         {
@@ -49,7 +51,16 @@ const createCVs = (userID) => {
             employment: employment,
             education: education,
             links: links,
-            user: userID
+            userInfo: {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                title: user.title,
+                email: user.email,
+                phone: user.phone,
+                profilePicture: user.profilePicture,
+                profileDescription: user.profileDescription
+            },
+            user: user.id
         },
         {
             name: "Poseidon",
@@ -57,7 +68,16 @@ const createCVs = (userID) => {
             employment: employment,
             education: education,
             links: links,
-            user: userID
+            userInfo: {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                title: user.title,
+                email: user.email,
+                phone: user.phone,
+                profilePicture: user.profilePicture,
+                profileDescription: user.profileDescription
+            },
+            user: user.id
         },
         {
             name: "Hermes",
@@ -65,7 +85,16 @@ const createCVs = (userID) => {
             employment: employment,
             education: education,
             links: links,
-            user: userID
+            userInfo: {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                title: user.title,
+                email: user.email,
+                phone: user.phone,
+                profilePicture: user.profilePicture,
+                profileDescription: user.profileDescription
+            },
+            user: user.id
         }
     )
 }
@@ -219,7 +248,7 @@ const templates = [
 
 
 User.create(users)
-    .then(allUsers => allUsers.forEach(user => createCVs(user.id)))
+    .then(allUsers => allUsers.forEach(user => createCVs(user)))
     .then(() => CV.create(cvs))
     // .then(allCVs => {
     //     allCVs.forEach(cv => {
