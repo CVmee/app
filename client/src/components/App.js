@@ -40,21 +40,17 @@ class App extends Component {
         this.fetchUser()
 
         return (
-            <>
-                <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
+            <main>
 
-                <main>
+                <Switch>
+                    <Route path="/" exact render={props => <Home {...props} setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />} />
+                    <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />
+                    <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />
+                    <Route path="/profile" render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
+                    <Route path="/cv/:id/edit" exact render={(props) => this.state.loggedInUser ? <CV {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
+                </Switch>
 
-                    <Switch>
-                        <Route path="/" exact render={() => <Home loggedInUser={this.state.loggedInUser} />} />
-                        <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />
-                        <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />
-                        <Route path="/profile" render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
-                        <Route path="/cv/:id/edit" exact render={(props) => this.state.loggedInUser ? <CV {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
-                    </Switch>
-
-                </main>
-            </>
+            </main>
         )
     }
 }

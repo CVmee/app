@@ -43,13 +43,49 @@ class EmploymentInfoForm extends Component {
         return (
             <Form>
                 <Row>
-                    <h2 className="job-title">{this.state.title} at {this.state.employer}</h2>
+                    <h3 className="job-title">{this.state.title} at {this.state.employer}</h3>
                 </Row>
                 <Row>
                     <Col lg="6">
                         <Form.Group controlId="title">
                             <Form.Label>Job Title</Form.Label>
                             <Form.Control name="title" type="text" value={this.state.title} onChange={this.handleInputChange} />
+                        </Form.Group>
+                    </Col>
+
+                    <Col lg="6">
+                        <Form.Group controlId="employer">
+                            <Form.Label>Employer</Form.Label>
+                            <Form.Control name="employer" type="text" value={this.state.employer} onChange={this.handleInputChange} />
+                        </Form.Group>
+                    </Col>
+
+                    <Col lg="6">
+                        <Form.Label>Start & End Date</Form.Label>
+                        <Row>
+                            <Col lg="6">
+                                <Form.Group controlId="start">
+                                    <Form.Control name="start" type="text" value={this.state.start} onChange={this.handleInputChange} />
+                                </Form.Group>
+                            </Col>
+                            <Col lg="6">
+                                <Form.Group controlId="end">
+                                    <Form.Control name="end" type="text" value={this.state.end} onChange={this.handleInputChange} />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    <Col lg="6">
+                        <Form.Group controlId="city">
+                            <Form.Label>City</Form.Label>
+                            <Form.Control name="city" type="text" value={this.state.city} onChange={this.handleInputChange} />
+                        </Form.Group>
+                    </Col>
+                    <Col >
+                        <Form.Group controlId="description">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control name="description" type="text" value={this.state.description} onChange={this.handleInputChange} />
                         </Form.Group>
                     </Col>
 

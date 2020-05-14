@@ -7,6 +7,8 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+import Navigation from '../../ui/navbar/Navbar'
+
 import { Link } from 'react-router-dom'
 
 
@@ -50,39 +52,43 @@ class Login extends Component {
     render() {
 
         return (
-            <Container>
+            <>
+                <Navigation setTheUser={this.props.setTheUser} loggedInUser={this.props.loggedInUser} />
 
-                <Row>
-                    <Col md={{ span: 4, offset: 4 }}>
+                <Container>
 
-                        <h3>Login</h3>
-                        <hr></hr>
-                        <Form onSubmit={this.handleSubmit}>
+                    <Row>
+                        <Col md={{ span: 4, offset: 4 }}>
 
-                            <Form.Group controlId="email">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control name="email" type="text" value={this.state.email} onChange={this.handleInputChange} />
-                            </Form.Group>
+                            <h3>Login</h3>
+                            <hr></hr>
+                            <Form onSubmit={this.handleSubmit}>
 
-                            <Form.Group controlId="pwd">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
-                            </Form.Group>
+                                <Form.Group controlId="email">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control name="email" type="text" value={this.state.email} onChange={this.handleInputChange} />
+                                </Form.Group>
 
-                            <p
-                                className='error-message'
-                                style={{ display: this.state.errorMessage ? 'block' : 'none' }}
-                            >{this.state.errorMessage}</p>
+                                <Form.Group controlId="pwd">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
+                                </Form.Group>
 
-                            <Button variant="dark" type="submit">Login</Button>
-                        </Form>
+                                <p
+                                    className='error-message'
+                                    style={{ display: this.state.errorMessage ? 'block' : 'none' }}
+                                >{this.state.errorMessage}</p>
 
-                        <p><small>Don't have an account? <Link to="/signup">Sign Up</Link></small></p>
+                                <Button variant="dark" type="submit">Login</Button>
+                            </Form>
 
-                    </Col>
-                </Row>
+                            <p><small>Don't have an account? <Link to="/signup">Sign Up</Link></small></p>
 
-            </Container>
+                        </Col>
+                    </Row>
+
+                </Container>
+            </>
         )
     }
 }
