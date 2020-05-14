@@ -3,8 +3,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Editor from '../cv/Editor/Editor'
+import Template from '../cv/Template/Template'
 
 import UserService from '../../../service/user.service'
+import CVService from '../../../service/cv.service'
+
 import { Switch, Route, Link, Redirect } from 'react-router-dom'
 
 class CV extends Component {
@@ -13,20 +17,17 @@ class CV extends Component {
         super(props)
         this.state = {
             user: this.props.loggedInUser,
+            userAction: 'edition',
+            cvID: this.props.match.params.id,
         }
         this.userService = new UserService()
-        this.cvService = new UserService()
     }
+
     render() {
         return (
-            <Row>
-                <Col id="editor-section" lg="6">
-                    <Container>Editor</Container>
-                </Col>
-                <Col id="visualizer-section" lg="6">
-                    <Container>Visualizer</Container>
-                </Col>
-            </Row>
+            this.state.userAction === 'edition'
+                ? <Editor {...this.props} cvID={this.state.cvID} cvInfo={this.state.cvInfo}/>
+                : <Template {...this.props} />
         )
     }
 }

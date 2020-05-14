@@ -50,7 +50,7 @@ class App extends Component {
                         <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />
                         <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />
                         <Route path="/profile" render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
-                        <Route path="/cv" render={() => this.state.loggedInUser ? <CV loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
+                        <Route path="/cv/:id/edit" exact render={(props) => this.state.loggedInUser ? <CV {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
                     </Switch>
 
                 </main>

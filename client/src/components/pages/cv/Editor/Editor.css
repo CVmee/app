@@ -1,0 +1,12 @@
+#visualizer-section {
+    background-color: darkgrey;
+    height: 100vh;
+}
+
+#editor-section {
+    height: 100vh;
+}
+
+.row {
+    margin: 0px;
+}

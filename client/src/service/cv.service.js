@@ -8,6 +8,8 @@ export default class CVService {
         })
     }
 
+    getCVInfo = (cvID) => this.service.get(`/cvs/info/${cvID}`)
+    updateCVInfo = (cvID, cvInfo) => this.service.post(`/cvs/update/${cvID}`, cvInfo)
     // getCVs = (userID) => this.service.get(`/cvs/user/${userID}`)
     // getTemplates = () => this.service.get('/cvs/templates')
     // createCV = (templateName, userID) => this.service.post('/cvs/newcv', {name: templateName, user: userID}) 
