@@ -9,7 +9,7 @@ const CV = require('../models/cv.model')
 const Template = require('../models/template.model')
 
 //mongoose.connect(`mongodb+srv://${process.env.MONGODBUSER}:${process.env.MONGODBPASSWORD}@damagesound-t1udi.gcp.mongodb.net/${process.env.DB}`, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.connect(`mongodb://localhost/${process.env.DB}`, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(`${process.env.DB}`, { useNewUrlParser: true, useUnifiedTopology: true })
 
 
 const bcrypt = require("bcrypt")
@@ -248,7 +248,10 @@ const templates = [
 
 
 User.create(users)
-    .then(allUsers => allUsers.forEach(user => createCVs(user)))
+    .then(allUsers => {
+        console.log('creando user')
+        allUsers.forEach(user => createCVs(user))
+    })
     .then(() => CV.create(cvs))
     // .then(allCVs => {
     //     allCVs.forEach(cv => {
