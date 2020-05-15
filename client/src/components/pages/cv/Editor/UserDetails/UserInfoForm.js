@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 
 import UserService from '../../../../../service/user.service'
+import CVService from '../../../../../service/cv.service'
 import { Switch, Route, Link, Redirect } from 'react-router-dom'
 
 import './UserInfoForm.css'
@@ -30,16 +31,27 @@ class UserInfoForm extends Component {
             // userAction: 'edition'
 
         }
-        this.userService = new UserService()
-        // this.cvService = new UserService()
+        this.userService = new UserService() // Probably Unnecessary
+        this.cvService = new CVService()
     }
 
     handleInputChange = event => {
         const { name, value } = event.target
-        this.state.cvInfo.userInfo[name] = value 
+        this.state.cvInfo.userInfo[name] = value
         // const {firstName, lastName, title, email,phone, profilePicture, profileDescription} = this.state
         // this.props.updateCVInfo({ firstName, lastName, title, email, phone, profilePicture, profileDescription})
         this.props.updateCVInfo(this.state.cvInfo)
+    }
+
+    handleFileUpload = event => {
+        const uploadData = new FormData()
+        uploadData.append('profilePicture', event.target.files[0])
+        this.cvService.updateProfilePicture(this.props.match.params.id, uploadData)
+            .then(response => {
+                this.state.cvInfo.userInfo.profilePicture = response.data
+                this.props.updateCVInfo(this.state.cvInfo)
+            })
+            .catch(error => console.log(error))
     }
 
     render() {
@@ -62,7 +74,7 @@ class UserInfoForm extends Component {
                             </Col>
                             <Col lg="6">
                                 <Form.Group controlId="profilePicture">
-                                    <Form.Label>Edit Picture</Form.Label>
+                                    <Form.Control name="profilePicture" type="file" onChange={this.handleFileUpload} />
                                 </Form.Group>
                                 <Form.Group controlId="profilePictureDelete">
                                     <Form.Label>Delete</Form.Label>

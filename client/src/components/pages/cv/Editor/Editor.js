@@ -52,6 +52,12 @@ class Editor extends Component {
         }, 1500)
     }
 
+    createNewElement = (cvInfo) => {
+        this.cvService.updateCVInfo(this.state.cvID, cvInfo)
+            .then(response => this.setState({ cvInfo: response.data}))
+            .catch(error => console.log(error))
+    }
+
     autoSave = () => {
 
     }
@@ -62,11 +68,11 @@ class Editor extends Component {
                 ? <Row>
                     <Col id="editor-section" lg="6">
                         <UserDetails {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
-                        <ProfileDescription {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
-                        <EmploymentInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
-                        <EducationInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
-                        <SkillsInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
-                        <LinksInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
+                        <ProfileDescription {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} />
+                        <EmploymentInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} />
+                        <EducationInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} />
+                        <SkillsInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} />
+                        <LinksInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} />
                     </Col>
                     <Col id="visualizer-section" lg="6">
                         <Container>Visualizer</Container>

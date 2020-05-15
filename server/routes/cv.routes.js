@@ -1,19 +1,16 @@
 const express = require("express")
 const router = express.Router()
 const passport = require("passport")
+const multer = require('multer')
+const uploader = require('../configs/cloudinary.config')
 
 
 const User = require('../models/user.model')
 const CV = require('../models/cv.model')
-const Employment = require('../models/employment.model')
-const Education = require('../models/education.model')
-const Link = require('../models/link.model')
 const Template = require('../models/template.model')
 
 
-
 router.get('/cvs/templates', (req, res, next) => {
-
     Template.find()
         .then(allTemplates => res.json(allTemplates))
         .catch(error => res.json(error))
@@ -21,7 +18,6 @@ router.get('/cvs/templates', (req, res, next) => {
 
 router.get('/cvs/user/:id', (req, res, next) => {
     // let cvs, employment, education, links // This will be used later on for CV previews
-
     CV.find({ user: req.params.id })
         .then(allCVs => res.json(allCVs))
         .catch(error => res.json(error))
@@ -34,7 +30,6 @@ router.get('/cvs/info/:id', (req, res, next) => {
 })
 
 router.post('/cvs/newcv', (req, res, next) => {
-
     const { name, user } = req.body
     let employment, education, links = []
     const { firstName, lastName, title, email, phone, profilePicture, profileDescription } = req.user
@@ -46,12 +41,25 @@ router.post('/cvs/newcv', (req, res, next) => {
 })
 
 router.post('/cvs/update/:id', (req, res, next) => {
-    console.log('ESTO ES LO QUE EL SERVER RECIBE')
-    console.log(req.body);
     CV.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(updatedCV => res.json(updatedCV))
         .catch(error => next(error))
 })
+
+router.post('/cvs/uploadProfilePic/:id', uploader.single('profilePicture'), (req, res, next) => {
+    if (!req.file) {
+        next(new Error('No file uploaded!'))
+        return
+    }
+    return res.json(req.file.secure_url)
+})
+
+// router.post('/cvs/createEducation/:id', (req, res, next) => {
+//     const newEducation = { degree: '', school: '', start: '', end: '', city: '', description: '' }
+//     CV.findByIdAndUpdate(req.params.id, { $push: { education: newEducation } }, { new: true })
+//         .then(updatedCV => res.json(updatedCV))
+//         .catch(error => next(error))
+// })
 
 
 
