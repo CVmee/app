@@ -33,10 +33,14 @@ const cvSchema = new Schema({
         city: String,
         description: String,
     }],
+    skills: [{
+        skill: String,
+        level: Number,
+    }],
     links: [{
         label: String,
         link: String,
-    }]
+    }],
 }, {
     timestamps: true
 })

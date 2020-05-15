@@ -9,7 +9,7 @@ import UserService from '../../../../../service/user.service'
 import { Switch, Route, Link, Redirect } from 'react-router-dom'
 
 
-class EmploymentInfoForm extends Component {
+class EducationInfoForm extends Component {
 
     constructor(props) {
         super(props)
@@ -17,14 +17,14 @@ class EmploymentInfoForm extends Component {
             autoSaveInterval: undefined, // Unnecessary
             user: this.props.loggedInUser,
             cvID: this.props.match.params.id,
-            cvInfo: this.props.employment, // Probably Unnecessary
-            _id: this.props.employment._id,
-            title: this.props.employment.title,
-            employer: this.props.employment.employer,
-            start: this.props.employment.start,
-            end: this.props.employment.end,
-            city: this.props.employment.city,
-            description: this.props.employment.description,
+            cvInfo: this.props.education, // Probably Unnecessary
+            _id: this.props.education._id,
+            degree: this.props.education.degree,
+            school: this.props.education.school,
+            start: this.props.education.start,
+            end: this.props.education.end,
+            city: this.props.education.city,
+            description: this.props.education.description,
 
             // userAction: 'edition'
 
@@ -36,28 +36,28 @@ class EmploymentInfoForm extends Component {
     handleInputChange = event => {
         const { name, value } = event.target
         this.state[name] = value
-        const { _id, title, employer, start, end, city, description } = this.state
-        this.props.updateEmploymentInfo(this.props.index, { _id, title, employer, start, end, city, description })
+        const { _id, degree, school, start, end, city, description } = this.state
+        this.props.updateEducationInfo(this.props.index, { _id, degree, school, start, end, city, description })
     }
 
     render() {
         return (
             <Form>
                 <Row>
-                    <h3 className="job-title">{this.state.title} at {this.state.employer}</h3>
+                    <h3 className="degree-title">{this.state.degree} at {this.state.school}</h3>
                 </Row>
                 <Row>
                     <Col lg="6">
-                        <Form.Group controlId="title">
-                            <Form.Label>Job Title</Form.Label>
-                            <Form.Control name="title" type="text" value={this.state.title} onChange={this.handleInputChange} />
+                        <Form.Group controlId="degree">
+                            <Form.Label>Degree</Form.Label>
+                            <Form.Control name="degree" type="text" value={this.state.degree} onChange={this.handleInputChange} />
                         </Form.Group>
                     </Col>
 
                     <Col lg="6">
-                        <Form.Group controlId="employer">
-                            <Form.Label>Employer</Form.Label>
-                            <Form.Control name="employer" type="text" value={this.state.employer} onChange={this.handleInputChange} />
+                        <Form.Group controlId="school">
+                            <Form.Label>School</Form.Label>
+                            <Form.Control name="school" type="text" value={this.state.school} onChange={this.handleInputChange} />
                         </Form.Group>
                     </Col>
 
@@ -97,9 +97,9 @@ class EmploymentInfoForm extends Component {
                         </Form.Group>
                     </Col>
                     <Col lg="6">
-                        <Form.Group controlId="title">
+                        <Form.Group controlId="degree">
                             <Form.Label>Last Name</Form.Label>
-                            <Form.Control name="title" type="text" value={this.state.employment.title} onChange={this.handleInputChange} />
+                            <Form.Control name="degree" type="text" value={this.state.employment.degree} onChange={this.handleInputChange} />
                         </Form.Group>
                     </Col>
                     <Col lg="6">
@@ -123,4 +123,4 @@ class EmploymentInfoForm extends Component {
     }
 }
 
-export default EmploymentInfoForm
+export default EducationInfoForm

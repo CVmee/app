@@ -8,6 +8,10 @@ import './Editor.css'
 import UserDetails from './UserDetails/UserDetails'
 import ProfileDescription from './ProfileDescription/ProfileDescription'
 import EmploymentInfo from './Employment/EmploymentInfo'
+import EducationInfo from './Education/EducationInfo'
+import SkillsInfo from './Skills/SkillsInfo'
+import LinksInfo from './Links/LinksInfo'
+
 
 import UserService from '../../../../service/user.service'
 import CVService from '../../../../service/cv.service'
@@ -60,6 +64,9 @@ class Editor extends Component {
                         <UserDetails {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
                         <ProfileDescription {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
                         <EmploymentInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
+                        <EducationInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
+                        <SkillsInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
+                        <LinksInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
                     </Col>
                     <Col id="visualizer-section" lg="6">
                         <Container>Visualizer</Container>

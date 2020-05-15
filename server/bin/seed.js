@@ -47,9 +47,9 @@ const createCVs = (user) => {
     cvs.push(
         {
             name: 'Apollo',
-            skills: ["HTML", "CSS", "JavaScript", "ES6", "React", "Node.js", "Express", "MongoDB"],
             employment: employment,
             education: education,
+            skills: skills,
             links: links,
             userInfo: {
                 firstName: user.firstName,
@@ -64,9 +64,9 @@ const createCVs = (user) => {
         },
         {
             name: "Poseidon",
-            skills: ["Yoga", "Flexbility", "Mindfullness", "Meditation"],
             employment: employment,
             education: education,
+            skills: skills,
             links: links,
             userInfo: {
                 firstName: user.firstName,
@@ -81,9 +81,9 @@ const createCVs = (user) => {
         },
         {
             name: "Hermes",
-            skills: [],
             employment: employment,
             education: education,
+            skills: skills,
             links: links,
             userInfo: {
                 firstName: user.firstName,
@@ -245,7 +245,20 @@ const templates = [
 
 ]
 
-
+const skills = [
+    {
+        skill: "Node.js",
+        level: 2,
+    },
+    {
+        skill: "JS",
+        level: 3,
+    },
+    {
+        skill: "React",
+        level: 3,
+    },
+]
 
 User.create(users)
     .then(allUsers => allUsers.forEach(user => createCVs(user)))

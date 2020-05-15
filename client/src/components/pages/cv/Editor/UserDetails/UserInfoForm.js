@@ -19,13 +19,13 @@ class UserInfoForm extends Component {
             user: this.props.loggedInUser,
             cvID: this.props.match.params.id,
             cvInfo: this.props.cvInfo, // Probably Unnecessary
-            firstName: this.props.cvInfo.userInfo.firstName,
-            lastName: this.props.cvInfo.userInfo.lastName,
-            title: this.props.cvInfo.userInfo.title,
-            email: this.props.cvInfo.userInfo.email,
-            phone: this.props.cvInfo.userInfo.phone,
-            profilePicture: this.props.cvInfo.userInfo.profilePicture,
-            profileDescription: this.props.cvInfo.userInfo.profileDescription, // Probably Unnecessary
+            // firstName: this.props.cvInfo.userInfo.firstName,
+            // lastName: this.props.cvInfo.userInfo.lastName,
+            // title: this.props.cvInfo.userInfo.title,
+            // email: this.props.cvInfo.userInfo.email,
+            // phone: this.props.cvInfo.userInfo.phone,
+            // profilePicture: this.props.cvInfo.userInfo.profilePicture,
+            //profileDescription: this.props.cvInfo.userInfo.profileDescription, // Probably Unnecessary
 
             // userAction: 'edition'
 
