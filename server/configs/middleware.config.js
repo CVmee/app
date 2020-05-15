@@ -4,7 +4,7 @@ const logger = require('morgan')
 const cors = require('cors')
 
 // CORS setup
-const whitelist = [process.env.LOCALDOMAIN]
+const whitelist = [process.env.DOMAIN]
 const corsOptions = {
     origin: (origin, cb) => {
         const originIsWhitelisted = whitelist.includes(origin)
