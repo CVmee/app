@@ -36,8 +36,6 @@ class ProfileDescriptionForm extends Component {
     handleInputChange = event => {
         const { name, value } = event.target
         this.state.cvInfo.userInfo[name] = value
-        // const {firstName, lastName, title, email,phone, profilePicture, profileDescription} = this.state
-        // this.props.updateCVInfo({ firstName, lastName, title, email, phone, profilePicture, profileDescription})
         this.props.updateCVInfo(this.state.cvInfo)
     }
 

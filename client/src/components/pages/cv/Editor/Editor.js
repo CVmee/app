@@ -11,6 +11,7 @@ import EmploymentInfo from './Employment/EmploymentInfo'
 import EducationInfo from './Education/EducationInfo'
 import SkillsInfo from './Skills/SkillsInfo'
 import LinksInfo from './Links/LinksInfo'
+import Visualizer from './Visualizer/Visualizer'
 
 
 import UserService from '../../../../service/user.service'
@@ -78,7 +79,7 @@ class Editor extends Component {
                         <LinksInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} updateCVInfoInstant={this.updateCVInfoInstant}/>
                     </Col>
                     <Col id="visualizer-section" lg="6">
-                        <Container>Visualizer</Container>
+                        <Visualizer {...this.props} cvInfo={this.state.cvInfo} />
                     </Col>
                 </Row>
                 : <> </>

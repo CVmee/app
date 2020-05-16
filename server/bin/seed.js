@@ -7,6 +7,7 @@ const Education = require('../models/education.model')
 const Link = require('../models/link.model')
 const CV = require('../models/cv.model')
 const Template = require('../models/template.model')
+const Description = require('../models/description.model')
 
 //mongoose.connect(`mongodb+srv://${process.env.MONGODBUSER}:${process.env.MONGODBPASSWORD}@damagesound-t1udi.gcp.mongodb.net/${process.env.DB}`, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connect(`mongodb://localhost/${process.env.LOCALDB}`, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -16,6 +17,99 @@ const bcrypt = require("bcrypt")
 const bcryptSalt = 10
 const salt = bcrypt.genSaltSync(bcryptSalt)
 
+
+const exampleDescription = [
+    {
+        "type": "paragraph",
+        "children":
+            [
+                {
+                    "text": "This is editable "
+                },
+                {
+                    "text": "rich",
+                    "bold": true
+                },
+                {
+                    "text": " text, "
+                },
+                {
+                    "text": "much",
+                    "italic": true
+                },
+                {
+                    "text": " better than a normal text !"
+                }
+            ]
+    },
+    {
+        "type": "paragraph",
+        "children":
+            [
+                {
+                    "text": "Since it's rich text, you can do "
+                },
+                {
+                    "text": "thing",
+                    "bold": true
+                },
+                {
+                    "text": "s like turn a selection of text "
+                },
+                {
+                    "text": "bold", "bold": true
+                },
+                {
+                    "text": ", or add a semantically rendered block quote in the middle of the page, like this:"
+                }
+            ]
+    },
+    {
+        "type": "paragraph",
+        "children":
+            [
+                {
+                    "text": "Try it out for yourself!sdjfgndfjgkdfsgjkldsfmg"
+                }
+            ]
+    },
+    {
+        "type": "paragraph",
+        "children": [{ "text": "" }]
+    },
+    {
+        "type": "bulleted-list",
+        "children":
+            [
+                {
+                    "type": "list-item",
+                    "children": [{ "text": "dfsgsdfgsdfg" }]
+                },
+                {
+                    "type": "list-item",
+                    "children": [
+                        {
+                            "text": "dsfgsdfgsdfgjjj"
+                        }
+                    ]
+                },
+                {
+                    "type": "list-item",
+                    "children": [{ "text": "dfsgsdfgdfsg" }]
+                },
+                { "type": "list-item", "children": [{ "text": "dsfg" }] },
+                { "type": "list-item", "children": [{ "text": "dsfgsdfg" }] },
+                { "type": "list-item", "children": [{ "text": "sdfgsdfg" }] },
+                { "type": "list-item", "children": [{ "text": "dsfgsdg" }] },
+                { "type": "list-item", "children": [{ "text": "" }] },
+                { "type": "list-item", "children": [{ "text": "" }] }]
+    },
+    { "type": "paragraph", "children": [{ "text": "sdfgsdfgsdfgsdfg" }] },
+    { "type": "paragraph", "children": [{ "text": "dfgdfsg" }] },
+    { "type": "paragraph", "children": [{ "text": "" }] }
+]
+
+const lulu = { description: exampleDescription }
 
 const users = [
     {
@@ -27,6 +121,7 @@ const users = [
         phone: "123456789",
         profilePicture: "https://qph.fs.quoracdn.net/main-qimg-134e3bf89fff27bf56bdbd04e7dbaedf.webp",
         profileDescription: "Experienced and dedicated Federal Government HR Manager with over ten years of experience, ensure HR systems support agencies in recruiting, hiring and retaining an excellent and diverse workforce. Adept at providing optimal support to executives and officials in need. Committed to integrity and constantly securing the privacy of identities and documents. Bringing forth a proven track record of facilitating excellent workflow in HR departments.",
+        // profileDescription: exampleDescription
     },
     {
         firstName: "Demo 1",
@@ -36,7 +131,8 @@ const users = [
         password: bcrypt.hashSync('pass2', salt),
         phone: "987654321",
         profilePicture: "https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.nelsonirrigation.com%2Fmedia%2Fpeople%2F%3FC%3DD%3BO%3DD&psig=AOvVaw2UHc769pta1clyVHKolHF6&ust=1589280988466000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIj2zZvTq-kCFQAAAAAdAAAAABAi",
-        profileDescription: "Experienced and passionate Yoga Instructor with over five years of teaching experience and advanced training in Ashtanga and Vinyasa approaches. Committed to providing extensive instruction and counseling to my clients, while motivating them to find true inner peace and their healthiest self. Adept in creating powerful teaching plans that aim to support and benefit each and every student. Bringing forth a love and respect for the art of yoga, and all that it encompasses. ",
+        //profileDescription: "Experienced and passionate Yoga Instructor with over five years of teaching experience and advanced training in Ashtanga and Vinyasa approaches. Committed to providing extensive instruction and counseling to my clients, while motivating them to find true inner peace and their healthiest self. Adept in creating powerful teaching plans that aim to support and benefit each and every student. Bringing forth a love and respect for the art of yoga, and all that it encompasses. "
+
     },
 ]
 
@@ -260,6 +356,45 @@ const skills = [
     },
 ]
 
+
+
+const initialDescriptionValue = [
+    {
+        type: 'paragraph',
+        children: [
+            { text: 'This is editable ' },
+            { text: 'rich', bold: true },
+            { text: ' text, ' },
+            { text: 'much', italic: true },
+            { text: ' better than a textarea !' },
+        ],
+    },
+    {
+        type: 'paragraph',
+        children: [
+            {
+                text:
+                    "Since it's rich text, you can do things like turn a selection of text ",
+            },
+            { text: 'bold', bold: true },
+            {
+                text:
+                    ', or add a semantically rendered block quote in the middle of the page, like this:',
+            },
+        ],
+    },
+    {
+        type: 'paragraph',
+        children: [{ text: 'Try it out for yourself!' }],
+    },
+]
+
+console.log('THIS IS THE OBJECT WE WANT')
+console.log('--------------------------------')
+console.log(lulu);
+console.log('UNFORMATTED')
+console.log('----------------------------')
+console.log(exampleDescription)
 User.create(users)
     .then(allUsers => allUsers.forEach(user => createCVs(user)))
     .then(() => CV.create(cvs))
@@ -274,6 +409,7 @@ User.create(users)
     // .then(() => Education.create(education))
     // .then(() => Link.create(links))
     .then(() => Template.create(templates))
+    .then(() => Description.create(exampleDescription))
     .then(() => {
         console.log('Ya se ha creado')
         mongoose.connection.close()

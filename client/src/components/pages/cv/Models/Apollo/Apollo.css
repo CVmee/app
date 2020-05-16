@@ -1,0 +1,11 @@
+#apollo-cv-container {
+    background-color: white;
+    margin: 20px 5px;
+    border-radius: 5px;
+}
+
+#apollo-cv-container #title-row img {
+    width: 100%;
+    /* margin: 20% 10%; */
+    border-radius: 7px;
+}

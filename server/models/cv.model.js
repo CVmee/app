@@ -15,7 +15,13 @@ const cvSchema = new Schema({
         password: String,
         phone: String,
         profilePicture: String,
-        profileDescription: String,
+        profileDescription: [
+            {
+                type: String,
+                children: [{}]
+            }
+        ]
+        
     },
     employment: [{
         title: String,
@@ -42,7 +48,7 @@ const cvSchema = new Schema({
         link: String,
     }],
 }, {
-    timestamps: true
+    timestamps: true,
 })
 
 const CV = mongoose.model("CV", cvSchema)
