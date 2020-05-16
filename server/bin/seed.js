@@ -120,8 +120,11 @@ const users = [
         password: bcrypt.hashSync('pass1', salt),
         phone: "123456789",
         profilePicture: "https://qph.fs.quoracdn.net/main-qimg-134e3bf89fff27bf56bdbd04e7dbaedf.webp",
-        profileDescription: "Experienced and dedicated Federal Government HR Manager with over ten years of experience, ensure HR systems support agencies in recruiting, hiring and retaining an excellent and diverse workforce. Adept at providing optimal support to executives and officials in need. Committed to integrity and constantly securing the privacy of identities and documents. Bringing forth a proven track record of facilitating excellent workflow in HR departments.",
-        // profileDescription: exampleDescription
+        //profileDescription: "Experienced and dedicated Federal Government HR Manager with over ten years of experience, ensure HR systems support agencies in recruiting, hiring and retaining an excellent and diverse workforce. Adept at providing optimal support to executives and officials in need. Committed to integrity and constantly securing the privacy of identities and documents. Bringing forth a proven track record of facilitating excellent workflow in HR departments.",
+        profileDescription: exampleDescription ,
+        // profileDescription: { description: exampleDescription },
+        // profileDescription: [{sup: "sop", sip: "sap"}, {yo: "yo", lo: "la"}],
+        // profileDescription: { description: [{ sup: "sop", sip: "sap" }, { yo: "yo", lo: "la" }]}
     },
     {
         firstName: "Demo 1",
@@ -132,6 +135,7 @@ const users = [
         phone: "987654321",
         profilePicture: "https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.nelsonirrigation.com%2Fmedia%2Fpeople%2F%3FC%3DD%3BO%3DD&psig=AOvVaw2UHc769pta1clyVHKolHF6&ust=1589280988466000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIj2zZvTq-kCFQAAAAAdAAAAABAi",
         //profileDescription: "Experienced and passionate Yoga Instructor with over five years of teaching experience and advanced training in Ashtanga and Vinyasa approaches. Committed to providing extensive instruction and counseling to my clients, while motivating them to find true inner peace and their healthiest self. Adept in creating powerful teaching plans that aim to support and benefit each and every student. Bringing forth a love and respect for the art of yoga, and all that it encompasses. "
+        //profileDescription: { description: exampleDescription }
 
     },
 ]
@@ -409,7 +413,7 @@ User.create(users)
     // .then(() => Education.create(education))
     // .then(() => Link.create(links))
     .then(() => Template.create(templates))
-    .then(() => Description.create(exampleDescription))
+    .then(() => Description.create({ description: exampleDescription }))
     .then(() => {
         console.log('Ya se ha creado')
         mongoose.connection.close()

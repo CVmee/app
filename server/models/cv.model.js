@@ -15,13 +15,9 @@ const cvSchema = new Schema({
         password: String,
         phone: String,
         profilePicture: String,
-        profileDescription: [
-            {
-                type: String,
-                children: [{}]
-            }
-        ]
+        profileDescription: { description: [{}] }
         
+
     },
     employment: [{
         title: String,

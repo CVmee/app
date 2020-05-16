@@ -1,12 +1,26 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const descriptionSchema = new Schema([
-    {
-        type: String,
-        children: [{}]
-    }
-])
+// AMAZING
+const descriptionSchema = new Schema({ description: [{}] })
+
+
+// Almost """""Good""""" one
+// const descriptionSchema = new Schema(
+//     [{
+//         type: String,
+//         children: [{}]
+//     }]
+// )
+
+// const descriptionSchema = new Schema(
+//     {
+//         description: [{
+//             type: String,
+//             children: [{}]
+//         }]
+//     }
+// )
 
 //const descriptionSchema = new Schema([{}])
 
