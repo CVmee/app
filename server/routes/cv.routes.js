@@ -54,12 +54,18 @@ router.post('/cvs/uploadProfilePic/:id', uploader.single('profilePicture'), (req
     return res.json(req.file.secure_url)
 })
 
-// router.post('/cvs/createEducation/:id', (req, res, next) => {
-//     const newEducation = { degree: '', school: '', start: '', end: '', city: '', description: '' }
-//     CV.findByIdAndUpdate(req.params.id, { $push: { education: newEducation } }, { new: true })
-//         .then(updatedCV => res.json(updatedCV))
-//         .catch(error => next(error))
-// })
+router.post('/cvs/createEducation/:id', (req, res, next) => {
+    const newEducation = { degree: '', school: '', start: '', end: '', city: '', description: '' }
+    CV.findByIdAndUpdate(req.params.id, { $push: { education: newEducation } }, { new: true })
+        .then(updatedCV => res.json(updatedCV))
+        .catch(error => next(error))
+})
+
+router.post('/cvs/deleteEducation/:id', (req, res, next) => {
+    CV.findByIdAndUpdate(req.params.id, { $pull: { education: { _id: req.body.id } } }, { new: true })
+        .then(updatedCV => res.json(updatedCV))
+        .catch(error => res.json(error))
+})
 
 
 

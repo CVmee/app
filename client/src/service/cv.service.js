@@ -12,8 +12,8 @@ export default class CVService {
     updateCVInfo = (cvID, cvInfo) => this.service.post(`/cvs/update/${cvID}`, cvInfo)
     updateProfilePicture = (cvID, picture) => this.service.post(`/cvs/uploadProfilePic/${cvID}`, picture)
 
-    // createEducation = (cvInfo) => this.service.post(`/cvs/createEducation/${cvInfo._id}`, cvInfo)
-    // deleteEducation = (cvID, itemID) => this.service.post(`/cvs/deleteEducation/${cvID}`, itemID)
+    createEducation = (cvInfo) => this.service.post(`/cvs/createEducation/${cvInfo._id}`, cvInfo)
+    deleteEducation = (cvID, itemID) => this.service.post(`/cvs/deleteEducation/${cvID}`, {id: itemID})
 
     // createEmployment = (cvInfo) => {this.service.post(`/cvs/createEmployment/${cvInfo._id}`)}
     // deleteEmployment = (cvID, itemID) => this.service.post(`/cvs/deleteEmployment/${cvID}`, itemID)

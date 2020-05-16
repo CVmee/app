@@ -33,25 +33,35 @@ class EducationInfo extends Component {
     }
 
     createEducationItem = () => {
-        const newEducation = { degree: '', school: '', start: '', end: '', city: '', description: '' }
-        this.state.cvInfo.education.push(newEducation)
-        this.props.createNewElement(this.state.cvInfo)
-        //this.props.updateCVInfo(this.state.cvInfo)
+        if (document.querySelector('#add-education-button').classList.contains('active')) {
+            this.cvService.createEducation(this.state.cvInfo)
+                .then(newCVInfo => {
+                    //this.state.educationInfo = newCVInfo.data.education // Still don't understand why is this necessary
+                    //this.props.updateCVInfo(newCVInfo.data)
+                    this.setState({ cvInfo: newCVInfo.data, educationInfo: newCVInfo.data.education })
+                    document.querySelector('#add-education-button').classList.remove('inactive')
+                    document.querySelector('#add-education-button').classList.add('active')
+                })
+                .catch(error => console.log(error))
+            document.querySelector('#add-education-button').classList.remove('active')
+            document.querySelector('#add-education-button').classList.add('inactive')
+        }
     }
 
     deleteEducationItem = (itemID) => {
-    //     console.log('INDEX')
-    //     console.log(index);
-    //     console.log('EDUCATION STATUS BEFORE')
-    //     console.log(this.state.cvInfo.education);
-    //     //this.state.cvInfo.education.splice(index, 1)
-    //    // this.state.educationInfo = this.state.cvInfo.education
-    //     console.log('EDUCATION STATUS AFTER')
-    //     console.log(this.state.cvInfo.education);
-    //     console.log(this.state.cvInfo)
-        const splicedArr = this.state.educationInfo.filter(education => education.id !== itemID)
-        this.state.cvInfo.education = splicedArr
-        //this.setSt
+        this.cvService.deleteEducation(this.state.cvID, itemID)
+            .then(response => {
+                this.setState({cvInfo: response.data, educationInfo: response.data.education})
+                this.props.updateCVInfoInstant(response.data)
+            })
+            .catch(error => console.log(error))
+        // const filteredArr = this.state.educationInfo.filter(item => item._id !== itemID)
+        // console.log('FILTERED ARR')
+        // console.log(filteredArr)
+        // this.state.cvInfo.education = filteredArr
+        // this.state.educationInfo = filteredArr
+        // this.setState({ educationInfo: filteredArr })
+        // this.props.deleteElement(this.state.cvInfo)
     }
 
     render() {
@@ -73,7 +83,7 @@ class EducationInfo extends Component {
                         deleteEducationItem={this.deleteEducationItem}
                     />)}
                 <Container>
-                    <Button onClick={this.createEducationItem}>+ Add Education</Button>
+                    <Button id="add-education-button" className='active' onClick={this.createEducationItem}>+ Add Education</Button>
                 </Container>
             </Container>
         )

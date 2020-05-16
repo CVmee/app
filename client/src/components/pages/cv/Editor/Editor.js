@@ -40,6 +40,7 @@ class Editor extends Component {
             .catch(error => console.log(error))
     }
 
+    //autosave
     updateCVInfo = (cvInfo) => {
         this.setState({ cvInfo })
         if (this.state.autoSaveInterval) {
@@ -54,9 +55,11 @@ class Editor extends Component {
 
     createNewElement = (cvInfo) => {
         this.cvService.updateCVInfo(this.state.cvID, cvInfo)
-            .then(response => this.setState({ cvInfo: response.data}))
+            .then(response => this.setState({ cvInfo: response.data }))
             .catch(error => console.log(error))
     }
+
+    updateCVInfoInstant = (cvInfo) => this.setState({cvInfo})
 
     autoSave = () => {
 
@@ -68,11 +71,11 @@ class Editor extends Component {
                 ? <Row>
                     <Col id="editor-section" lg="6">
                         <UserDetails {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} />
-                        <ProfileDescription {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} />
-                        <EmploymentInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} />
-                        <EducationInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} />
-                        <SkillsInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} />
-                        <LinksInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} />
+                        <ProfileDescription {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} updateCVInfoInstant={this.updateCVInfoInstant}/>
+                        <EmploymentInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} updateCVInfoInstant={this.updateCVInfoInstant}/>
+                        <EducationInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} updateCVInfoInstant={this.updateCVInfoInstant}/>
+                        <SkillsInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} updateCVInfoInstant={this.updateCVInfoInstant}/>
+                        <LinksInfo {...this.props} cvInfo={this.state.cvInfo} updateCVInfo={this.updateCVInfo} createNewElement={this.createNewElement} updateCVInfoInstant={this.updateCVInfoInstant}/>
                     </Col>
                     <Col id="visualizer-section" lg="6">
                         <Container>Visualizer</Container>

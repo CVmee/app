@@ -42,9 +42,7 @@ class EducationInfoForm extends Component {
 
 
     render() {
-        console.log('RENDERING EDUCATION FORM!')
-        console.log(this.state);
-        console.log(this.props.education._id);
+        
         return (
             <>
 
