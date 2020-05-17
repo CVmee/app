@@ -23,7 +23,10 @@ class Visualizer extends Component {
         this.cvService = new CVService()
     }
 
+
     render() {
+        console.log('getting mounted')
+        console.log(this.state)
         switch (this.state.cvInfo.name) {
             case 'Apollo':
                 return <Apollo cvInfo={this.state.cvInfo} />

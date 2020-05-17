@@ -12,6 +12,8 @@ import Login from './pages/login/Login'
 import Profile from './pages/profile/Profile'
 import CV from './pages/cv/CV'
 
+import Gallery from './pages/gallery/Gallery'
+
 import AuthService from './../service/auth.service'
 
 class App extends Component {
@@ -48,6 +50,8 @@ class App extends Component {
                     <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />
                     <Route path="/profile" render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
                     <Route path="/cv/:id/edit" exact render={(props) => this.state.loggedInUser ? <CV {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
+                    <Route path="/gallery" render={props => <Gallery {...props} setTheUser={this.setTheUser} />} />
+
                 </Switch>
 
             </main>

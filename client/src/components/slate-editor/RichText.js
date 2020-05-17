@@ -14,35 +14,62 @@ const HOTKEYS = {
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list']
 
+
+
 const RichText = (props) => {
-    // const [value, setValue] = useState(props.cvInfo.userInfo.profileDescription)
-    const [value, setValue] = useState(initialValue)
+
+    // CARE!
+    const declareInitialValue = (type) => {
+        switch (type) {
+            case 'profile':
+                return props.cvInfo.userInfo.profileDescription            
+            case 'employment':
+                return props.cvInfo.employment[props.index].description  
+            case 'education':
+                return props.cvInfo.education[props.index].description
+            default:
+                break;
+        }
+    }
+
+
+    const [value, setValue] = useState(declareInitialValue(props.type))
+    
     const renderElement = useCallback(props => <Element {...props} />, [])
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])
     const editor = useMemo(() => withHistory(withReact(createEditor())), [])
 
-    console.log('initialValue')
-    console.log(initialValue)
-    console.log('props.cvInfo.profileDescription')
-    console.log(props.cvInfo.userInfo.profileDescription)
-
-    const sayHi = (value) => {
+    const filterAction = (value) => {
         setValue(value)
-        //console.log(props.cvInfo)
-        props.cvInfo.profileDescription = value
-        props.updateCVInfo(props.cvInfo)
+        switch (props.type) {
+            case 'profile':
+                props.cvInfo.userInfo.profileDescription = value
+                props.updateCVInfo(props.cvInfo)
+                break;
+            case 'employment':
+                props.handleDescriptionChange(value)
+                break;
+            case 'education':
+                props.handleDescriptionChange(value)
+                break;
+            default:
+                break;
+        }
     }
+
+    
     
     return (
-        <Slate editor={editor} value={value} onChange={value => sayHi(value)}>
+        <Slate editor={editor} value={value} onChange={value => filterAction(value)}>
             <Toolbar>
                 <MarkButton format="bold" icon="format_bold" />
-                <MarkButton format="italic" icon="format_italic" />
-                <MarkButton format="underline" icon="format_underlined" />
+                {/* <MarkButton format="italic" icon="format_italic" /> */}
+                {/* <MarkButton format="underline" icon="format_underlined" /> */}
                 <BlockButton format="numbered-list" icon="format_list_numbered" />
                 <BlockButton format="bulleted-list" icon="format_list_bulleted" />
             </Toolbar>
             <Editable
+                className="editor-rich-text"
                 renderElement={renderElement}
                 renderLeaf={renderLeaf}
                 placeholder="Describe yourself in 2-3 sentences"
@@ -173,38 +200,5 @@ const MarkButton = ({ format, icon }) => {
     )
 }
 
-const initialValue = [
-    {
-        type: 'paragraph',
-        children: [
-            { text: 'This is editable ' },
-            { text: 'rich', bold: true },
-            { text: ' text, ' },
-            { text: 'much', italic: true },
-            { text: ' better than a textarea !' },
-        ],
-    },
-    {
-        type: 'paragraph',
-        children: [
-            {
-                text:
-                    "Since it's rich text, you can do things like turn a selection of text ",
-            },
-            { text: 'bold', bold: true },
-            {
-                text:
-                    ', or add a semantically rendered block quote in the middle of the page, like this:',
-            },
-        ],
-    },
-    {
-        type: 'paragraph',
-        children: [{ text: 'Try it out for yourself!' }],
-    },
-]
-
-
-//const handleInputChange = this.props
 
 export default RichText

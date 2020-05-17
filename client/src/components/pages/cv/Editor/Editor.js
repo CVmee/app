@@ -43,7 +43,7 @@ class Editor extends Component {
 
     //autosave
     updateCVInfo = (cvInfo) => {
-        this.setState({ cvInfo })
+        this.setState({cvInfo})
         if (this.state.autoSaveInterval) {
             clearTimeout(this.state.autoSaveInterval)
         }
@@ -67,6 +67,8 @@ class Editor extends Component {
     }
 
     render() {
+        console.log('EDITOR MOUNTED')
+        console.log(this.state);
         return (
             this.state.cvInfo
                 ? <Row>

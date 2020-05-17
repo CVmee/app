@@ -8,6 +8,13 @@
     overflow: scroll;
 }
 
+
 .row {
     margin: 0px;
+}
+
+.editor-rich-text {
+    min-height: 100px;
+    max-height: 200px;
+    overflow: scroll;
 }

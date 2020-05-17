@@ -15,7 +15,7 @@ const cvSchema = new Schema({
         password: String,
         phone: String,
         profilePicture: String,
-        profileDescription: { description: [{}] }
+        profileDescription: [{}],
         
 
     },
@@ -25,7 +25,7 @@ const cvSchema = new Schema({
         start: String,
         end: String,
         city: String,
-        description: String,
+        description: [{}],
     }],
     education: [{
         degree: String,
@@ -33,7 +33,7 @@ const cvSchema = new Schema({
         start: String,
         end: String,
         city: String,
-        description: String,
+        description: [{}],
     }],
     skills: [{
         skill: String,

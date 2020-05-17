@@ -24,15 +24,9 @@ class EmploymentInfo extends Component {
     }
 
     updateEmploymentInfo = (index, info) => {
-        console.log('before')
-        console.log(this.state.employmentInfo)
-        console.log('after')
-        console.log(this.state.employmentInfo)
         this.state.employmentInfo[index] = info
         const newEmploymentInfo = this.state.employmentInfo
         this.state.cvInfo = { ...this.state.cvInfo, employment: newEmploymentInfo }
-        console.log('THIS IS THE NEW STATE')
-        console.log(this.state.cvInfo);
         this.props.updateCVInfo(this.state.cvInfo)
     }
 

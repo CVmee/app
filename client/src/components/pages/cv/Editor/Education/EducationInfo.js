@@ -32,6 +32,8 @@ class EducationInfo extends Component {
         this.props.updateCVInfo(this.state.cvInfo)
     }
 
+
+    // To be Reviewed
     createEducationItem = () => {
         if (document.querySelector('#add-education-button').classList.contains('active')) {
             this.cvService.createEducation(this.state.cvInfo)
@@ -48,6 +50,7 @@ class EducationInfo extends Component {
         }
     }
 
+    // To be Reviewed
     deleteEducationItem = (itemID) => {
         this.cvService.deleteEducation(this.state.cvID, itemID)
             .then(response => {
@@ -65,8 +68,7 @@ class EducationInfo extends Component {
     }
 
     render() {
-        console.log('RENDERING EDUCATION INFO! --------------------')
-        console.log(this.state)
+
         return (
             <Container>
                 {/* <h1 id="editor-user-title">{this.state.cvInfo.title}, {this.state.cvInfo.firstName} {this.state.cvInfo.lastName}</h1>            */}

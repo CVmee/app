@@ -23,13 +23,14 @@ class ProfileDescription extends Component {
         this.userService = new UserService()
         // this.cvService = new UserService()
     }
+
     render() {
         return (
             <Container>
                 {/* <h1 id="editor-user-title">{this.state.cvInfo.title}, {this.state.cvInfo.firstName} {this.state.cvInfo.lastName}</h1>            */}
                 <h2 className="editor-section-title">Profile Description</h2>
-                <ProfileDescriptionForm {...this.props} {...this.state.cvInfo} updateCVInfo={this.props.updateCVInfo} />
-                {/* <RichText  {...this.props} {...this.state.cvInfo} updateCVInfo={this.props.updateCVInfo} /> */}
+                {/* <ProfileDescriptionForm {...this.props} {...this.state.cvInfo} updateCVInfo={this.props.updateCVInfo} /> */}
+                <RichText {...this.props} {...this.state.cvInfo} updateCVInfo={this.props.updateCVInfo} type='profile' initialValue={this.props.cvInfo.userInfo.profileDescription}/>
             </Container>
         )
     }

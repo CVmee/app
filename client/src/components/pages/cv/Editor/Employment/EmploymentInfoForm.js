@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form'
 import UserService from '../../../../../service/user.service'
 import { Switch, Route, Link, Redirect } from 'react-router-dom'
 
+import RichText from '../../../../slate-editor/RichText'
 
 class EmploymentInfoForm extends Component {
 
@@ -36,6 +37,12 @@ class EmploymentInfoForm extends Component {
     handleInputChange = event => {
         const { name, value } = event.target
         this.state[name] = value
+        const { _id, title, employer, start, end, city, description } = this.state
+        this.props.updateEmploymentInfo(this.props.index, { _id, title, employer, start, end, city, description })
+    }
+
+    handleDescriptionChange = value => {
+        this.state.description = value
         const { _id, title, employer, start, end, city, description } = this.state
         this.props.updateEmploymentInfo(this.props.index, { _id, title, employer, start, end, city, description })
     }
@@ -86,37 +93,17 @@ class EmploymentInfoForm extends Component {
                     <Col >
                         <Form.Group controlId="description">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control name="description" type="text" value={this.state.description} onChange={this.handleInputChange} />
+                            {/* <Form.Control name="description" type="text" value={this.state.description} onChange={this.handleInputChange} /> */}
+                            <RichText
+                                {...this.props}
+                                {...this.state.cvInfo}
+                                updateCVInfo={this.props.updateCVInfo}
+                                type='employment'
+                                index={this.props.index}
+                                handleDescriptionChange={this.handleDescriptionChange} 
+                                />
                         </Form.Group>
                     </Col>
-
-                    {/* <Col lg="6">
-                        <Form.Group controlId="firstName">
-                            <Form.Label>First Name</Form.Label>
-                            <Form.Control name="firstName" type="text" value={this.state.firstName} onChange={this.handleInputChange} />
-                        </Form.Group>
-                    </Col>
-                    <Col lg="6">
-                        <Form.Group controlId="title">
-                            <Form.Label>Last Name</Form.Label>
-                            <Form.Control name="title" type="text" value={this.state.employment.title} onChange={this.handleInputChange} />
-                        </Form.Group>
-                    </Col>
-                    <Col lg="6">
-                        <Form.Group controlId="email">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control name="email" type="text" value={this.state.email} onChange={this.handleInputChange} />
-                        </Form.Group>
-                    </Col>
-                    <Col lg="6">
-                        <Form.Group controlId="phone">
-                            <Form.Label>Phone</Form.Label>
-                            <Form.Control name="phone" type="text" value={this.state.phone} onChange={this.handleInputChange} />
-                        </Form.Group>
-                    </Col> */}
-
-                    {/* <Button variant="dark" onClick={() => this.props.closeModal()} style={{ marginRight: '10px' }}>Cerrar</Button>
-                    <Button variant="dark" type="submit">Crear montaña rusa</Button> */}
                 </Row>
             </Form>
         )

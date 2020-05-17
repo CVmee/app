@@ -8,6 +8,8 @@ import Form from 'react-bootstrap/Form'
 import UserService from '../../../../../service/user.service'
 import { Switch, Route, Link, Redirect } from 'react-router-dom'
 
+import RichText from '../../../../slate-editor/RichText'
+
 
 class EducationInfoForm extends Component {
 
@@ -35,6 +37,12 @@ class EducationInfoForm extends Component {
     handleInputChange = event => {
         const { name, value } = event.target
         this.state[name] = value
+        const { _id, degree, school, start, end, city, description } = this.state
+        this.props.updateEducationInfo(this.props.index, { _id, degree, school, start, end, city, description })
+    }
+
+    handleDescriptionChange = value => {
+        this.state.description = value
         const { _id, degree, school, start, end, city, description } = this.state
         this.props.updateEducationInfo(this.props.index, { _id, degree, school, start, end, city, description })
     }
@@ -90,7 +98,15 @@ class EducationInfoForm extends Component {
                         <Col >
                             <Form.Group controlId="description">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control name="description" type="text" value={this.state.description} onChange={this.handleInputChange} />
+                                {/* <Form.Control name="description" type="text" value={this.state.description} onChange={this.handleInputChange} /> */}
+                                <RichText
+                                    {...this.props}
+                                    {...this.state.cvInfo}
+                                    updateCVInfo={this.props.updateCVInfo}
+                                    type='education'
+                                    index={this.props.index}
+                                    handleDescriptionChange={this.handleDescriptionChange}
+                                />
                             </Form.Group>
                         </Col>
                     </Row>
