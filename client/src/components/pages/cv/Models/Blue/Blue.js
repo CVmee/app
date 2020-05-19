@@ -14,14 +14,14 @@ import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from
 
 
 import '../CV.css'
-import './Apollo.css'
+import './Blue.css'
 
 import PersonIcon from '@material-ui/icons/Person'
 import SchoolIcon from '@material-ui/icons/School'
 import WorkIcon from '@material-ui/icons/Work'
 
 
-class Apollo extends Component {
+class Blue extends Component {
 
     constructor(props) {
         super(props)
@@ -52,7 +52,7 @@ class Apollo extends Component {
 
 
     getCointainerWidth = () => {
-        const containerWidth = document.querySelector('#apollo-cv-container').offsetWidth
+        const containerWidth = document.querySelector('#apollo-blue-cv-container').offsetWidth
         const titleStyle = { fontSize: containerWidth / 30 }
         const subtitleStyle = { fontSize: containerWidth / 40 }
         const paragraphStyle = { fontSize: containerWidth / 50 }
@@ -68,19 +68,11 @@ class Apollo extends Component {
     //     this.state.cvInfo.userInfo.profileDescription.map(node => this.state.profileDescriptionHTML.push(this.serialize(node)))
     // }
 
-    componentDidUpdate = (prevProps, prevState) => {
-        if (prevProps !== this.props) {
-            const newDescription = []
-            this.props.cvInfo.userInfo.profileDescription.map(node => newDescription.push(this.serialize(node)))
-            this.setState({ cvInfo: this.props.cvInfo, profileDescriptionHTML: newDescription })
-        }
+    componentWillReceiveProps = (nextProps) => {
+        const newDescription = []
+        nextProps.cvInfo.userInfo.profileDescription.map(node => newDescription.push(this.serialize(node)))
+        this.setState({ cvInfo: nextProps.cvInfo, profileDescriptionHTML: newDescription })
     }
-
-    // componentWillReceiveProps = (nextProps) => {
-    //     const newDescription = []
-    //     nextProps.cvInfo.userInfo.profileDescription.map(node => newDescription.push(this.serialize(node)))
-    //     this.setState({ cvInfo: nextProps.cvInfo, profileDescriptionHTML: newDescription })
-    // }
 
     serialize = node => {
         if (Text.isText(node)) {
@@ -114,7 +106,7 @@ class Apollo extends Component {
 
     render() {
         return (
-            <Container id='apollo-cv-container' className='cv-container'>
+            <Container id='apollo-blue-cv-container' className='cv-container'>
 
                 <section className='title-section'>
 
@@ -269,4 +261,4 @@ class Apollo extends Component {
     }
 }
 
-export default Apollo
+export default Blue

@@ -51,12 +51,36 @@ router.post('/cvs/uploadProfilePic/:id', uploader.single('profilePicture'), (req
         next(new Error('No file uploaded!'))
         return
     }
+    console.log('CREATED FILE', req.file)
     return res.json(req.file.secure_url)
 })
 
+// CV Items Routes
+
 router.post('/cvs/createEducation/:id', (req, res, next) => {
-    const newEducation = { degree: '', school: '', start: '', end: '', city: '', description: '' }
+    const newEducation = { degree: '', school: '', start: '', end: '', city: '', description: [{ "type": "paragraph", "children": [{ "text": "" }] }] }
     CV.findByIdAndUpdate(req.params.id, { $push: { education: newEducation } }, { new: true })
+        .then(updatedCV => res.json(updatedCV))
+        .catch(error => next(error))
+})
+
+router.post('/cvs/createEmployment/:id', (req, res, next) => {
+    const newEmployment = { title: '', employer: '', start: '', end: '', city: '', description: [{ "type": "paragraph", "children": [{ "text": "" }] }] }
+    CV.findByIdAndUpdate(req.params.id, { $push: { employment: newEmployment } }, { new: true })
+        .then(updatedCV => res.json(updatedCV))
+        .catch(error => next(error))
+})
+
+router.post('/cvs/createSkill/:id', (req, res, next) => {
+    const newSkill = { skill: 'New Skill', level: '' }
+    CV.findByIdAndUpdate(req.params.id, { $push: { skills: newSkill } }, { new: true })
+        .then(updatedCV => res.json(updatedCV))
+        .catch(error => next(error))
+})
+
+router.post('/cvs/createLink/:id', (req, res, next) => {
+    const newLink = { label: 'New Link', link: '' }
+    CV.findByIdAndUpdate(req.params.id, { $push: { links: newLink } }, { new: true })
         .then(updatedCV => res.json(updatedCV))
         .catch(error => next(error))
 })
@@ -64,9 +88,34 @@ router.post('/cvs/createEducation/:id', (req, res, next) => {
 router.post('/cvs/deleteEducation/:id', (req, res, next) => {
     CV.findByIdAndUpdate(req.params.id, { $pull: { education: { _id: req.body.id } } }, { new: true })
         .then(updatedCV => res.json(updatedCV))
+        .catch(error => next(error))
+})
+
+router.post('/cvs/deleteEmployment/:id', (req, res, next) => {
+    CV.findByIdAndUpdate(req.params.id, { $pull: { employment: { _id: req.body.id } } }, { new: true })
+        .then(updatedCV => res.json(updatedCV))
+        .catch(error => next(error))
+})
+
+router.post('/cvs/deleteLink/:id', (req, res, next) => {
+    CV.findByIdAndUpdate(req.params.id, { $pull: { links: { _id: req.body.id } } }, { new: true })
+        .then(updatedCV => res.json(updatedCV))
+        .catch(error => next(error))
+})
+
+router.post('/cvs/deleteSkill/:id', (req, res, next) => {
+    CV.findByIdAndUpdate(req.params.id, { $pull: { skills: { _id: req.body.id } } }, { new: true })
+        .then(updatedCV => res.json(updatedCV))
+        .catch(error => next(error))
+})
+
+router.post('/cvs/changeTemplate/:id', (req, res, next) => {
+    CV.findByIdAndUpdate(req.params.id, { name: `${req.body.name}` }, { new: true })
+        .then(updatedCV => res.json(updatedCV))
         .catch(error => res.json(error))
 })
 
 
-
 module.exports = router
+
+

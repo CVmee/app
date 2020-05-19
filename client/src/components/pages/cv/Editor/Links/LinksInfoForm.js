@@ -2,59 +2,58 @@ import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 
-import UserService from '../../../../../service/user.service'
-import { Switch, Route, Link, Redirect } from 'react-router-dom'
-
-
 class LinksInfoForm extends Component {
-
     constructor(props) {
         super(props)
-        this.state = {
-            autoSaveInterval: undefined, // Unnecessary
-            user: this.props.loggedInUser,
-            cvID: this.props.match.params.id,
-            cvInfo: this.props.link, // Probably Unnecessary
-            _id: this.props.link._id,
-            label: this.props.link.label,
-            link: this.props.link.link,
-            // userAction: 'edition'
-
-        }
-        this.userService = new UserService()
-        // this.cvService = new UserService()
+        this.state = { link: this.props.link }
     }
+
+    componentDidUpdate = (prevProps) => prevProps !== this.props && this.setState({link: this.props.link})
 
     handleInputChange = event => {
         const { name, value } = event.target
-        this.state[name] = value
-        const { _id, label, link } = this.state
-        this.props.updateLinksInfo(this.props.index, { _id, label, link })
+        this.setState({ link: { ...this.state.link, [name]: value } }, () => {
+            this.props.updateLinksInfo(this.props.index, this.state.link)
+        })
+        
+    }
+
+    formWrapper = (index) => {
+        const form = document.querySelector(`#link-form-${index}`)
+        form.classList.toggle('show')
     }
 
     render() {
-        return (
-            <Form>
-                <Row>
-                    <Col lg="6">
-                        <Form.Group controlId="label">
-                            <Form.Label>Label</Form.Label>
-                            <Form.Control name="label" type="text" value={this.state.label} onChange={this.handleInputChange} />
-                        </Form.Group>
-                    </Col>
+        return this.state.link ? (
+            <>
+                <Form>
+                    <Row>
+                        <h3 className="skill-title" onClick={() => this.formWrapper(this.props.index)}>{this.state.link.label}</h3>
+                    </Row>
+                    <div id={`link-form-${this.props.index}`} className='form-wrapper'>
+                    <Row>
+                        <Col lg="6">
+                            <Form.Group controlId="label">
+                                <Form.Label>Label</Form.Label>
+                                <Form.Control name="label" type="text" value={this.state.link.label} onChange={this.handleInputChange} />
+                            </Form.Group>
+                        </Col>
 
-                    <Col lg="6">
-                        <Form.Group controlId="link">
-                            <Form.Label>Link</Form.Label>
-                            <Form.Control name="link" type="text" value={this.state.link} onChange={this.handleInputChange} />
-                        </Form.Group>
-                    </Col>
-                </Row>
-            </Form>
-        )
+                        <Col lg="6">
+                            <Form.Group controlId="link">
+                                <Form.Label>Link</Form.Label>
+                                <Form.Control name="link" type="text" value={this.state.link.link} onChange={this.handleInputChange} />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    </div>
+                </Form>
+                {/* <Button variant="danger" onClick={() => this.props.deleteLinkItem(this.state.link._id)}>Delete Link</Button> */}
+                <Button variant="danger" onClick={() => this.props.deleteElement('link', this.state.link._id)}>Delete Link</Button>
+            </>
+        ) : <p>Cargando...</p>
     }
 }
 

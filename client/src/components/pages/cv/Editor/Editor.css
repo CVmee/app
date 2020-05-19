@@ -1,3 +1,7 @@
+.cv-container {
+    overflow-y: scroll;
+}
+
 #visualizer-section {
     background-color: darkgrey;
     max-height: 100vh;
@@ -17,4 +21,12 @@
     min-height: 100px;
     max-height: 200px;
     overflow: scroll;
+}
+
+.form-wrapper {
+    transition: .5s;
+    display: none;
+}
+.form-wrapper.show {
+    display: block;
 }

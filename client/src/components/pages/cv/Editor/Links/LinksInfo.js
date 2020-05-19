@@ -1,56 +1,60 @@
 import React, { Component } from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-
 import LinksInfoForm from './LinksInfoForm'
-
-import UserService from '../../../../../service/user.service'
-import { Switch, Route, Link, Redirect } from 'react-router-dom'
+import CVService from '../../../../../service/cv.service'
 
 class LinksInfo extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            user: this.props.loggedInUser,
-            cvInfo: this.props.cvInfo,
-            linksInfo: this.props.cvInfo.links,
-            // userAction: 'edition'
-        }
-        this.userService = new UserService()
-        // this.cvService = new UserService()
+        this.state = { links: this.props.links }
+        this.cvService = new CVService()
     }
 
+    componentDidUpdate = (prevProps) => prevProps !== this.props && this.setState({ links: this.props.links })
+
     updateLinksInfo = (index, info) => {
-        console.log('before')
-        console.log(this.state.linksInfo)
-        console.log('after')
-        console.log(this.state.linksInfo)
-        this.state.linksInfo[index] = info
-        const newLinksInfo = this.state.linksInfo
-        this.state.cvInfo = { ...this.state.cvInfo, links: newLinksInfo }
-        console.log('THIS IS THE NEW STATE')
-        console.log(this.state.cvInfo);
-        this.props.updateCVInfo(this.state.cvInfo)
+        console.log('this gets executed and gets the following info: ', info)
+        const newLinksInfo = [...this.state.links]
+        newLinksInfo[index] = info
+        this.setState({ links: newLinksInfo }, () => {
+            this.props.updateCVInfo(this.state.links, 'links')
+        })
     }
+
+    // createLinkItem = () => {
+    //     this.cvService.createLink(this.state.cvInfo)
+    //         .then(response => this.setState({ cvInfo: response.data }))
+    //         .catch(error => console.log(error))
+    // }
+
+    // deleteLinkItem = (itemID) => {
+    //     this.cvService.deleteLink(this.state.cvInfo._id, itemID)
+    //         .then(response => {
+    //             this.setState({ cvInfo: response.data })
+    //             this.props.updateCVInfo(this.state.cvInfo)
+    //         })
+    //         .catch(error => console.log(error))
+    // }
 
     render() {
         return (
             <Container>
-                {/* <h1 id="editor-user-title">{this.state.cvInfo.title}, {this.state.cvInfo.firstName} {this.state.cvInfo.lastName}</h1>            */}
                 <h2 className="editor-section-title">Links</h2>
-                {this.state.linksInfo.map((link, index) =>
+                {this.state.links && this.state.links.map((link, index) =>
                     <LinksInfoForm
                         {...this.props}
-                        {...this.state.cvInfo}
-                        // updateCVInfo={this.props.updateCVInfo}
                         link={link}
                         key={index}
                         index={index}
                         updateLinksInfo={this.updateLinksInfo}
+                        deleteLinkItem={this.deleteLinkItem}
                     />)}
+                <Container>
+                    {/* <Button id="add-link-button" onClick={this.createLinkItem}>+ Add Link</Button> */}
+                    <Button id="add-link-button" onClick={() => this.props.createNewElement('link')}>+ Add Link</Button>
+                </Container>
             </Container>
         )
     }

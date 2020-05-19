@@ -1,50 +1,59 @@
 import React, { Component } from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-
 import SkillsInfoForm from './SkillsInfoForm'
-
-import UserService from '../../../../../service/user.service'
-import { Switch, Route, skill, Redirect } from 'react-router-dom'
+import CVService from '../../../../../service/cv.service'
 
 class SkillsInfo extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            user: this.props.loggedInUser,
-            cvInfo: this.props.cvInfo,
-            skillsInfo: this.props.cvInfo.skills,
-            // userAction: 'edition'
-        }
-        this.userService = new UserService()
-        // this.cvService = new UserService()
+        this.state = { skills: this.props.skills }
+        this.cvService = new CVService()
     }
 
+    componentDidUpdate = (prevProps) => prevProps !== this.props && this.setState({skills: this.props.skills})
+
     updateSkillsInfo = (index, info) => {
-        this.state.skillsInfo[index] = info
-        const newSkillsInfo = this.state.skillsInfo
-        this.state.cvInfo = { ...this.state.cvInfo, skills: newSkillsInfo }
-        this.props.updateCVInfo(this.state.cvInfo)
+        const newSkillsInfo = [...this.state.skills]
+        newSkillsInfo[index] = info
+        this.setState({ skills: newSkillsInfo }, () => {
+            this.props.updateCVInfo(this.state.skills, 'skills')
+        })
     }
+
+    // createSkillItem = () => {
+    //     this.cvService.createSkill(this.state.cvInfo)
+    //         .then(response => this.setState({ cvInfo: response.data }))
+    //         .catch(error => console.log(error))
+    // }
+
+    // deleteSkillItem = (itemID) => {
+    //     this.cvService.deleteSkill(this.state.cvInfo._id, itemID)
+    //         .then(response => {
+    //             this.setState({ cvInfo: response.data })
+    //             this.props.updateCVInfo(this.state.cvInfo)
+    //         })
+    //         .catch(error => console.log(error))
+    // }
 
     render() {
         return (
             <Container>
-                {/* <h1 id="editor-user-title">{this.state.cvInfo.title}, {this.state.cvInfo.firstName} {this.state.cvInfo.lastName}</h1>            */}
                 <h2 className="editor-section-title">Skills</h2>
-                {this.state.skillsInfo.map((skill, index) =>
+                {this.state.skills && this.state.skills.map((skill, index) =>
                     <SkillsInfoForm
                         {...this.props}
-                        {...this.state.cvInfo}
-                        // updateCVInfo={this.props.updateCVInfo}
                         skill={skill}
                         key={index}
                         index={index}
                         updateSkillsInfo={this.updateSkillsInfo}
+                        deleteSkillItem={this.deleteSkillItem}
                     />)}
+                <Container>
+                    {/* <Button id="add-skill-button" onClick={this.createSkillItem}>+ Add Skill</Button> */}
+                    <Button id="add-skill-button" onClick={() => this.props.createNewElement('skill')}>+ Add Skill</Button>
+                </Container>
             </Container>
         )
     }

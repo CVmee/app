@@ -11,6 +11,8 @@ import Signup from './pages/signup/Signup'
 import Login from './pages/login/Login'
 import Profile from './pages/profile/Profile'
 import CV from './pages/cv/CV'
+import Template from './pages/cv/Template/Template'
+import OnlineCV from './pages/cv/OnlineCV/OnlineCV'
 
 import Gallery from './pages/gallery/Gallery'
 
@@ -50,8 +52,10 @@ class App extends Component {
                     <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />
                     <Route path="/profile" render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
                     <Route path="/cv/:id/edit" exact render={(props) => this.state.loggedInUser ? <CV {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
+                    <Route path='/cv/:id/templates' exact render={(props) => true ? <Template {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/"/>} />
+                    <Route path='/cv/:id' exact render={props => <OnlineCV {...props} />} />
                     <Route path="/gallery" render={props => <Gallery {...props} setTheUser={this.setTheUser} />} />
-
+                    
                 </Switch>
 
             </main>

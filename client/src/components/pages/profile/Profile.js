@@ -26,11 +26,7 @@ class Profile extends Component {
     getCVs = (userID) => {
         if (!this.state.cvs) {
             this.userService.getCVs(userID)
-                .then(response => {
-                    console.log('ESTA ES LA RESPUESTA DE GETCVS')
-                    console.log(response);
-                    this.setState({ cvs: response.data })
-                })
+                .then(response => this.setState({ cvs: response.data }))
                 .catch(error => console.log(error))
         }
     }

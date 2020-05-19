@@ -14,24 +14,20 @@ const HOTKEYS = {
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list']
 
-
-
 const RichText = (props) => {
 
-    // CARE!
     const declareInitialValue = (type) => {
         switch (type) {
             case 'profile':
-                return props.cvInfo.userInfo.profileDescription            
+                return props.userInfo.profileDescription            
             case 'employment':
-                return props.cvInfo.employment[props.index].description  
+                return props.employment.description  
             case 'education':
-                return props.cvInfo.education[props.index].description
+                return props.education.description
             default:
                 break;
         }
     }
-
 
     const [value, setValue] = useState(declareInitialValue(props.type))
     
@@ -43,8 +39,7 @@ const RichText = (props) => {
         setValue(value)
         switch (props.type) {
             case 'profile':
-                props.cvInfo.userInfo.profileDescription = value
-                props.updateCVInfo(props.cvInfo)
+                props.handleProfileChange(value)
                 break;
             case 'employment':
                 props.handleDescriptionChange(value)

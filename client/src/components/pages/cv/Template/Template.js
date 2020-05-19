@@ -4,8 +4,12 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 
-import UserService from '../../../../service/user.service'
-import { Switch, Route, Link, Redirect } from 'react-router-dom'
+import CVService from '../../../../service/cv.service'
+
+import './Template.css'
+
+import Apollo from '../Models/Apollo/Apollo'
+import Blue from '../Models/Blue/Blue'
 
 class Template extends Component {
 
@@ -13,21 +17,52 @@ class Template extends Component {
         super(props)
         this.state = {
             user: this.props.loggedInUser,
-            // userAction: 'edition'
+            cvInfo: {},
+            error: ''
         }
-        this.userService = new UserService()
-        // this.cvService = new UserService()
+        this.cvService = new CVService()
     }
+
+    componentDidMount = () => {
+        this.cvService.getCVInfo(this.props.match.params.id)
+            .then(response => this.setState({ cvInfo: response.data }))
+            .catch(() => this.setState({ error: "Sorry, the CV you're looking for doesn't exists :(" }))
+    }
+
+    changeTemplate = name => {
+        this.cvService.changeTemplate(this.state.cvInfo._id, name)
+            .then(response => this.setState({ cvInfo: response.data }))
+            .catch(error => console.log(error))
+    }
+
+
+    renderTemplateModel = () => {
+        switch (this.state.cvInfo.name) {
+            case 'Apollo':
+                return <Apollo cvInfo={this.state.cvInfo} />
+
+            case 'Blue':
+                return <Blue cvInfo={this.state.cvInfo} />
+
+            default:
+                return <></>
+        }
+    }
+
+
     render() {
         return (
             <Row>
-                <Col id="editor-section" lg="6">
-                    <Container>
-                        This is the Template Visualizer
-                    </Container>
+                <Col id="template-templates-section" lg="4">
+                    {this.state.cvInfo &&
+                        <Container>
+                            <Button onClick={() => this.changeTemplate('Apollo')} >Apollo</Button>
+                            <Button onClick={() => this.changeTemplate('Blue')} >Blue</Button>
+                        </Container>
+                    }
                 </Col>
-                <Col id="visualizer-section" lg="6">
-                    <Container>Visualizer</Container>
+                <Col id="template-visualizer-section" lg="8">
+                    {this.state.cvInfo && this.renderTemplateModel()}
                 </Col>
             </Row>
         )

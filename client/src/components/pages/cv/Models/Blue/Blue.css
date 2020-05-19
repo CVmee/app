@@ -1,6 +1,6 @@
 /* General */
-#apollo-cv-container {
-    background-color: white;
+#apollo-blue-cv-container {
+    background-color: blue;
     margin: 2.5% 5%;
     /* margin-right: 5%; */
     border-radius: 5px;
@@ -11,29 +11,29 @@
 
 
 /* Title  */
-#apollo-cv-container #title-row {
+#apollo-blue-cv-container #title-row {
     width: 100%;
     margin: 2% 0%;
 }
-#apollo-cv-container #title-row img {
+#apollo-blue-cv-container #title-row img {
     width: 100%;
     border-radius: 7px;
 }
 
-#apollo-cv-container #title-row .profile-title-col h3{
+#apollo-blue-cv-container #title-row .profile-title-col h3{
     /* font-size: 1.5em; */
     font-weight: 700;
     margin: 0;
 }
 
 /* Profile */
-#apollo-cv-container #profile-row {
+#apollo-blue-cv-container #profile-row {
 }
 
-/* #apollo-cv-container #profile-row #profile-icon{
+/* #apollo-blue-cv-container #profile-row #profile-icon{
     font-size: 1em;
 } */
 
-#apollo-cv-container #profile-row #profile-section-title{
+#apollo-blue-cv-container #profile-row #profile-section-title{
     /* font-size: 1.5em; */
 }

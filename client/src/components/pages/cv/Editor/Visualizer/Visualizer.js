@@ -1,38 +1,21 @@
 import React, { Component } from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
-
-
 import UserService from '../../../../../service/user.service'
 import CVService from '../../../../../service/cv.service'
-import { Switch, Route, Link, Redirect } from 'react-router-dom'
-
 import Apollo from '../../Models/Apollo/Apollo'
-
-class Visualizer extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            user: this.props.loggedInUser,
-            cvInfo: this.props.cvInfo,
-        }
-        this.userService = new UserService()
-        this.cvService = new CVService()
-    }
+import Blue from '../../Models/Blue/Blue'
 
 
-    render() {
-        console.log('getting mounted')
-        console.log(this.state)
-        switch (this.state.cvInfo.name) {
-            case 'Apollo':
-                return <Apollo cvInfo={this.state.cvInfo} />
-            default:
-                return <></>
-        }
+const  Visualizer = (props) => {
+
+    switch (props.cvInfo.name) {
+        case 'Apollo':
+            return <Apollo cvInfo={props.cvInfo} />
+
+        case 'Blue':
+            return <Blue cvInfo={props.cvInfo} />
+        
+        default:
+            break;
     }
 }
 
