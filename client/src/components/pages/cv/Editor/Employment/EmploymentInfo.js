@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import EmploymentInfoForm from './EmploymentInfoForm'
 import CVService from '../../../../../service/cv.service'
+import { mouseEnterAddButton, mouseLeaveAddButton } from '../../../../../clientEvents/editorEvents'
 
 
 class EmploymentInfo extends Component {
@@ -23,30 +24,13 @@ class EmploymentInfo extends Component {
         })
     }
 
-    // createEmploymentItem = () => {
-    //     this.cvService.createEmployment(this.props.cvID)
-    //         .then(response => {
-    //             this.setState({ employment: response.data.employment }, () => {
-    //                 this.props.updateCVInfo(this.state.employment, 'employment')
-    //             })
-    //         })
-    //         .catch(error => console.log(error))
-    // }
-
-    // deleteEmploymentItem = (itemID) => {
-    //     this.cvService.deleteEmployment(this.props.cvID, itemID)
-    //         .then(response => {
-    //             this.setState({ employment: response.data.employment }, () => {
-    //                 this.props.updateCVInfo(this.state.employment, 'employment')
-    //             })
-    //         })
-    //         .catch(error => console.log(error))
-    // }
-
     render() {
         return (
-            <Container>
-                <h2 className="editor-section-title">Employment Info</h2>
+            <section className='editor-form-section'>
+
+                <Col lg={{ span: 10, offset: 1 }}>
+                    <h2 className="editor-section-title">Employment Info</h2>
+                </Col>
                 {this.state.employment && this.state.employment.map((employment, index) =>
                     <EmploymentInfoForm
                         {...this.props}
@@ -54,14 +38,22 @@ class EmploymentInfo extends Component {
                         key={index}
                         index={index}
                         updateEmploymentInfo={this.updateEmploymentInfo}
-                        // deleteEmploymentItem={this.deleteEmploymentItem}
                         deleteElement={this.props.deleteElement}
                     />)}
                 <Container>
-                    {/* <Button id="add-employment-button" onClick={this.createEmploymentItem}>+ Add Employment</Button> */}
-                    <Button id="add-employment-button" onClick={() => this.props.createNewElement('employment')}>+ Add Employment</Button>
+                    <Col lg={{ offset: 1 }}>
+                        <p
+                            id="add-employment-button"
+                            className='add-item-button'
+                            onClick={() => this.props.createNewElement('employment')}
+                            onMouseEnter={() => mouseEnterAddButton('employment')}
+                            onMouseLeave={() => mouseLeaveAddButton('employment')}
+                        >+ Add Employment
+                        </p>
+                    </Col>
                 </Container>
-            </Container>
+
+            </section>
         )
     }
 }

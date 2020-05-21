@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
 import LinksInfoForm from './LinksInfoForm'
 import CVService from '../../../../../service/cv.service'
+import { mouseEnterAddButton, mouseLeaveAddButton } from '../../../../../clientEvents/editorEvents'
+
 
 class LinksInfo extends Component {
 
@@ -23,25 +25,15 @@ class LinksInfo extends Component {
         })
     }
 
-    // createLinkItem = () => {
-    //     this.cvService.createLink(this.state.cvInfo)
-    //         .then(response => this.setState({ cvInfo: response.data }))
-    //         .catch(error => console.log(error))
-    // }
-
-    // deleteLinkItem = (itemID) => {
-    //     this.cvService.deleteLink(this.state.cvInfo._id, itemID)
-    //         .then(response => {
-    //             this.setState({ cvInfo: response.data })
-    //             this.props.updateCVInfo(this.state.cvInfo)
-    //         })
-    //         .catch(error => console.log(error))
-    // }
-
     render() {
         return (
-            <Container>
-                <h2 className="editor-section-title">Links</h2>
+
+            <section className='editor-form-section'>
+
+                <Col lg={{ span: 10, offset: 1 }}>
+                    <h2 className="editor-section-title">Links</h2>
+                </Col>
+
                 {this.state.links && this.state.links.map((link, index) =>
                     <LinksInfoForm
                         {...this.props}
@@ -51,11 +43,21 @@ class LinksInfo extends Component {
                         updateLinksInfo={this.updateLinksInfo}
                         deleteLinkItem={this.deleteLinkItem}
                     />)}
+
                 <Container>
-                    {/* <Button id="add-link-button" onClick={this.createLinkItem}>+ Add Link</Button> */}
-                    <Button id="add-link-button" onClick={() => this.props.createNewElement('link')}>+ Add Link</Button>
+                    <Col lg={{ offset: 1 }}>
+                        <p
+                            id="add-link-button"
+                            className='add-item-button'
+                            onClick={() => this.props.createNewElement('link')}
+                            onMouseEnter={() => mouseEnterAddButton('link')}
+                            onMouseLeave={() => mouseLeaveAddButton('link')}
+                        >+ Add Link
+                        </p>
+                    </Col>
                 </Container>
-            </Container>
+
+            </section>
         )
     }
 }

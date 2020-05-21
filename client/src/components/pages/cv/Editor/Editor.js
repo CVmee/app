@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import './Editor.css'
-
 import UserInfo from './UserDetails/UserInfoForm'
 import EmploymentInfo from './Employment/EmploymentInfo'
 import EducationInfo from './Education/EducationInfo'
 import SkillsInfo from './Skills/SkillsInfo'
 import LinksInfo from './Links/LinksInfo'
 import Visualizer from './Visualizer/Visualizer'
-
+import { Link } from 'react-router-dom'
+import './Editor.css'
 
 import UserService from '../../../../service/user.service'
 import CVService from '../../../../service/cv.service'
+
+import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap'
+
+import { mouseEnterEditorVisualizer, mouseLeaveEditorVisualizer } from '../../../../clientEvents/editorEvents'
 
 class Editor extends Component {
 
@@ -132,6 +135,15 @@ class Editor extends Component {
                             updateCVInfo={this.updateCVInfo}
                         />
 
+                        <EducationInfo
+                            {...this.props}
+                            education={this.state.cvInfo.education}
+                            cvID={this.state.cvInfo._id}
+                            updateCVInfo={this.updateCVInfo}
+                            createNewElement={this.createNewElement}
+                            deleteElement={this.deleteElement}
+                        />
+
                         <EmploymentInfo
                             {...this.props}
                             employment={this.state.cvInfo.employment}
@@ -141,14 +153,6 @@ class Editor extends Component {
                             deleteElement={this.deleteElement}
                         />
 
-                        <EducationInfo
-                            {...this.props}
-                            education={this.state.cvInfo.education}
-                            cvID={this.state.cvInfo._id}
-                            updateCVInfo={this.updateCVInfo}
-                            createNewElement={this.createNewElement}
-                            deleteElement={this.deleteElement}
-                        />
 
                         <SkillsInfo
                             {...this.props}
@@ -168,7 +172,15 @@ class Editor extends Component {
                         />
                     </Col>
 
-                    <Col id="visualizer-section" lg="6">
+                    <Col
+                        id="visualizer-section"
+                        lg="6"
+                        onMouseEnter={mouseEnterEditorVisualizer}
+                        onMouseLeave={mouseLeaveEditorVisualizer}
+                    >
+                        <div id='zoom-out-editor-icon-container'>
+                            <Link to={`/cv/${this.props.match.params.id}/templates`} ><ZoomOutMapIcon id='zoom-out-editor-icon' /></Link>
+                        </div>
 
                         <Visualizer
                             {...this.props}
@@ -179,7 +191,7 @@ class Editor extends Component {
                     </Col>
 
                 </Row>
-                : <> </>
+                : <> <p>Cargando...</p> </>
         )
     }
 }

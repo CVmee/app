@@ -3,6 +3,7 @@ import UserService from '../../../../../service/user.service'
 import CVService from '../../../../../service/cv.service'
 import Apollo from '../../Models/Apollo/Apollo'
 import Blue from '../../Models/Blue/Blue'
+import Hermes from '../../Models/Hermes/Hermes'
 
 
 const  Visualizer = (props) => {
@@ -14,8 +15,11 @@ const  Visualizer = (props) => {
         case 'Blue':
             return <Blue cvInfo={props.cvInfo} />
         
+        case 'Hermes':
+            return <Hermes cvInfo={props.cvInfo} />
+        
         default:
-            break;
+            return <p>Cargando...</p>
     }
 }
 

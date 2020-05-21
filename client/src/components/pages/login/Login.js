@@ -53,7 +53,6 @@ class Login extends Component {
 
         return (
             <>
-                <Navigation setTheUser={this.props.setTheUser} loggedInUser={this.props.loggedInUser} />
 
                 <Container>
 

@@ -116,7 +116,6 @@ class Gallery extends Component {
 
         return (
             <>
-                <Navigation setTheUser={this.props.setTheUser} loggedInUser={this.props.loggedInUser} />
                 <h1>Gallery</h1>
                 <div>{this.exampleDescription.map(node => this.serialize(node))}</div>
                 <hr></hr>

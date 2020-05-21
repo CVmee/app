@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import EducationInfoForm from './EducationInfoForm'
 import CVService from '../../../../../service/cv.service'
+import { mouseEnterAddButton, mouseLeaveAddButton } from '../../../../../clientEvents/editorEvents'
 
 
 class EducationInfo extends Component {
@@ -24,31 +25,15 @@ class EducationInfo extends Component {
         })
     }
 
-    // createEducationItem = () => {
-    //     this.cvService.createEducation(this.props.cvID)
-    //         .then(response => {
-    //             this.setState({ education: response.data.education }, () => {
-    //                 this.props.updateCVInfo(this.state.education, 'education')
-    //             })
-    //         })
-    //         .catch(error => console.log(error))
-    // }
-
-    // deleteEducationItem = (itemID) => {
-    //     this.cvService.deleteEducation(this.props.cvID, itemID)
-    //         .then(response => {
-    //             this.setState({ education: response.data.education }, () => {
-    //                 this.props.updateCVInfo(this.state.education, 'education')
-    //             })
-    //         })
-    //         .catch(error => console.log(error))
-    // }
-
     render() {
 
         return (
-            <Container>
-                <h2 className="editor-section-title">Education Info</h2>
+
+            <section className='editor-form-section'>
+
+                <Col lg={{ span: 10, offset: 1 }}>
+                    <h2 className="editor-section-title">Education Info</h2>
+                </Col>
                 {this.state.education && this.state.education.map((education, index) =>
                     <EducationInfoForm
                         {...this.props}
@@ -56,14 +41,23 @@ class EducationInfo extends Component {
                         key={index}
                         index={index}
                         updateEducationInfo={this.updateEducationInfo}
-                        // deleteEducationItem={this.deleteEducationItem}
                         deleteElement={this.props.deleteElement}
                     />)}
                 <Container>
-                    {/* <Button id="add-education-button" onClick={this.createEducationItem}>+ Add Education</Button> */}
-                    <Button id="add-education-button" onClick={() => this.props.createNewElement('education')}>+ Add Education</Button>
+                    <Col lg={{ offset: 1 }}>
+                        <p
+                            id="add-education-button"
+                            className='add-item-button'
+                            onClick={() => this.props.createNewElement('education')}
+                            onMouseEnter={() => mouseEnterAddButton('education')}
+                            onMouseLeave={() => mouseLeaveAddButton('education')}
+                        >+ Add Education
+                        </p>
+                    </Col>
                 </Container>
-            </Container>
+
+            </section>
+
         )
     }
 }

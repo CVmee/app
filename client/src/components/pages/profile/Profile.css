@@ -1,0 +1,10 @@
+#profile-container {
+    margin-top: 40px;
+}
+
+#profile-container .miniature-container img{
+    width: 50%;
+    margin: 50px;
+    border-radius: 5px;
+    border: 1px solid indigo;
+}

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import SkillsInfoForm from './SkillsInfoForm'
 import CVService from '../../../../../service/cv.service'
+import { mouseEnterAddButton, mouseLeaveAddButton } from '../../../../../clientEvents/editorEvents'
+
 
 class SkillsInfo extends Component {
 
@@ -22,25 +24,15 @@ class SkillsInfo extends Component {
         })
     }
 
-    // createSkillItem = () => {
-    //     this.cvService.createSkill(this.state.cvInfo)
-    //         .then(response => this.setState({ cvInfo: response.data }))
-    //         .catch(error => console.log(error))
-    // }
-
-    // deleteSkillItem = (itemID) => {
-    //     this.cvService.deleteSkill(this.state.cvInfo._id, itemID)
-    //         .then(response => {
-    //             this.setState({ cvInfo: response.data })
-    //             this.props.updateCVInfo(this.state.cvInfo)
-    //         })
-    //         .catch(error => console.log(error))
-    // }
 
     render() {
         return (
-            <Container>
-                <h2 className="editor-section-title">Skills</h2>
+            <section className='editor-form-section'>
+                
+                <Col lg={{ span: 10, offset: 1 }}>
+                    <h2 className="editor-section-title">Skills</h2>
+                </Col>
+
                 {this.state.skills && this.state.skills.map((skill, index) =>
                     <SkillsInfoForm
                         {...this.props}
@@ -50,11 +42,21 @@ class SkillsInfo extends Component {
                         updateSkillsInfo={this.updateSkillsInfo}
                         deleteSkillItem={this.deleteSkillItem}
                     />)}
+                
                 <Container>
-                    {/* <Button id="add-skill-button" onClick={this.createSkillItem}>+ Add Skill</Button> */}
-                    <Button id="add-skill-button" onClick={() => this.props.createNewElement('skill')}>+ Add Skill</Button>
+                    <Col lg={{ offset: 1 }}>
+                        <p
+                            id="add-skill-button"
+                            className='add-item-button'
+                            onClick={() => this.props.createNewElement('skill')}
+                            onMouseEnter={() => mouseEnterAddButton('skill')}
+                            onMouseLeave={() => mouseLeaveAddButton('skill')}
+                        >+ Add Skill
+                        </p>
+                    </Col>
                 </Container>
-            </Container>
+                
+            </section>
         )
     }
 }

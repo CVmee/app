@@ -32,10 +32,10 @@ router.get('/cvs/info/:id', (req, res, next) => {
 router.post('/cvs/newcv', (req, res, next) => {
     const { name, user } = req.body
     let employment, education, links = []
-    const { firstName, lastName, title, email, phone, profilePicture, profileDescription } = req.user
-    const userInfo = { firstName, lastName, title, email, phone, profilePicture, profileDescription }
-
-    CV.create({ name, user, employment, education, links, userInfo })
+    const { firstName, lastName, title, email, phone, profilePicture } = req.user
+    const userInfo = { firstName, lastName, title, email, phone, profilePicture, profileDescription: [{ "type": "paragraph", "children": [{ "text": "" }] }] }
+    const color = '#000000'
+    CV.create({ name, color, user, employment, education, links, userInfo })
         .then(createdCV => res.json(createdCV))
         .catch(error => res.json(error))
 })
@@ -58,14 +58,14 @@ router.post('/cvs/uploadProfilePic/:id', uploader.single('profilePicture'), (req
 // CV Items Routes
 
 router.post('/cvs/createEducation/:id', (req, res, next) => {
-    const newEducation = { degree: '', school: '', start: '', end: '', city: '', description: [{ "type": "paragraph", "children": [{ "text": "" }] }] }
+    const newEducation = { degree: 'New Education', school: 'School', start: '', end: '', city: '', description: [{ "type": "paragraph", "children": [{ "text": "" }] }] }
     CV.findByIdAndUpdate(req.params.id, { $push: { education: newEducation } }, { new: true })
         .then(updatedCV => res.json(updatedCV))
         .catch(error => next(error))
 })
 
 router.post('/cvs/createEmployment/:id', (req, res, next) => {
-    const newEmployment = { title: '', employer: '', start: '', end: '', city: '', description: [{ "type": "paragraph", "children": [{ "text": "" }] }] }
+    const newEmployment = { title: 'New Employment', employer: 'Company', start: '', end: '', city: '', description: [{ "type": "paragraph", "children": [{ "text": "" }] }] }
     CV.findByIdAndUpdate(req.params.id, { $push: { employment: newEmployment } }, { new: true })
         .then(updatedCV => res.json(updatedCV))
         .catch(error => next(error))

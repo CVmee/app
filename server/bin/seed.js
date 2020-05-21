@@ -98,7 +98,7 @@ const users = [
         password: bcrypt.hashSync('pass2', salt),
         phone: "987654321",
         profilePicture: "https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.nelsonirrigation.com%2Fmedia%2Fpeople%2F%3FC%3DD%3BO%3DD&psig=AOvVaw2UHc769pta1clyVHKolHF6&ust=1589280988466000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIj2zZvTq-kCFQAAAAAdAAAAABAi",
-        profileDescription: []
+        profileDescription: [{ "type": "paragraph", "children": [{ "text": "" }] }]
     },
 ]
 
@@ -109,6 +109,8 @@ const createCVs = (user) => {
     cvs.push(
         {
             name: 'Apollo',
+            // color: ['#000000', '#ffffff'],
+            color: '#ffffff',
             employment: employment,
             education: education,
             skills: skills,
@@ -126,6 +128,8 @@ const createCVs = (user) => {
         },
         {
             name: "Poseidon",
+            // color: ['#000000', '#ffffff'],
+            color: '#ffffff',
             employment: employment,
             education: education,
             skills: skills,
@@ -143,6 +147,7 @@ const createCVs = (user) => {
         },
         {
             name: "Hermes",
+            color: '#ffffff',
             employment: employment,
             education: education,
             skills: skills,

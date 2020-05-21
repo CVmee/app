@@ -19,9 +19,9 @@ const RichText = (props) => {
     const declareInitialValue = (type) => {
         switch (type) {
             case 'profile':
-                return props.userInfo.profileDescription            
+                return props.userInfo.profileDescription
             case 'employment':
-                return props.employment.description  
+                return props.employment.description
             case 'education':
                 return props.education.description
             default:
@@ -30,10 +30,24 @@ const RichText = (props) => {
     }
 
     const [value, setValue] = useState(declareInitialValue(props.type))
-    
+
     const renderElement = useCallback(props => <Element {...props} />, [])
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])
     const editor = useMemo(() => withHistory(withReact(createEditor())), [])
+
+    const filterPlaceholder = () => {
+        switch (props.type) {
+            case 'profile':
+                return 'Describe yourself in 2-3 sentences'
+            case 'employment':
+                return 'Short bullet point list description with key information about your work experience'
+            case 'education':
+                return 'Short bullet point list description with key information about your education background'
+            default:
+        }
+    }
+
+    const filteredPlaceholder = filterPlaceholder()
 
     const filterAction = (value) => {
         setValue(value)
@@ -52,12 +66,12 @@ const RichText = (props) => {
         }
     }
 
-    
-    
+
+
     return (
         <Slate editor={editor} value={value} onChange={value => filterAction(value)}>
             <Toolbar>
-                <MarkButton format="bold" icon="format_bold" />
+                {/* <MarkButton format="bold" icon="format_bold" /> */}
                 {/* <MarkButton format="italic" icon="format_italic" /> */}
                 {/* <MarkButton format="underline" icon="format_underlined" /> */}
                 <BlockButton format="numbered-list" icon="format_list_numbered" />
@@ -67,7 +81,7 @@ const RichText = (props) => {
                 className="editor-rich-text"
                 renderElement={renderElement}
                 renderLeaf={renderLeaf}
-                placeholder="Describe yourself in 2-3 sentences"
+                placeholder={filteredPlaceholder}
                 spellCheck
                 autoFocus
                 onKeyDown={event => {

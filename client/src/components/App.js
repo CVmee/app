@@ -13,6 +13,7 @@ import Profile from './pages/profile/Profile'
 import CV from './pages/cv/CV'
 import Template from './pages/cv/Template/Template'
 import OnlineCV from './pages/cv/OnlineCV/OnlineCV'
+import UserDetails from './pages/profile/UserDetails'
 
 import Gallery from './pages/gallery/Gallery'
 
@@ -45,6 +46,9 @@ class App extends Component {
 
         return (
             <main>
+                <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
+
+                {this.state.loggedInUser && !this.state.loggedInUser.firstName && <Redirect to="/userDetails" />}
 
                 <Switch>
                     <Route path="/" exact render={props => <Home {...props} setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />} />
@@ -52,10 +56,11 @@ class App extends Component {
                     <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />
                     <Route path="/profile" render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
                     <Route path="/cv/:id/edit" exact render={(props) => this.state.loggedInUser ? <CV {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
-                    <Route path='/cv/:id/templates' exact render={(props) => true ? <Template {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/"/>} />
+                    <Route path='/cv/:id/templates' exact render={(props) => true ? <Template {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
                     <Route path='/cv/:id' exact render={props => <OnlineCV {...props} />} />
                     <Route path="/gallery" render={props => <Gallery {...props} setTheUser={this.setTheUser} />} />
-                    
+                    <Route path="/userDetails" render={props => <UserDetails {...props} userInfo={this.state.loggedInUser} />} />
+
                 </Switch>
 
             </main>

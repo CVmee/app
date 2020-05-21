@@ -3,15 +3,16 @@
 }
 
 #visualizer-section {
-    background-color: darkgrey;
+    background-color: rgb(50, 62, 95);
     max-height: 100vh;
 }
+
+/* General Editor Settings  */
 
 #editor-section {
     max-height: 100vh;
     overflow: scroll;
 }
-
 
 .row {
     margin: 0px;
@@ -20,7 +21,8 @@
 .editor-rich-text {
     min-height: 100px;
     max-height: 200px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: wrap;
 }
 
 .form-wrapper {
@@ -29,4 +31,128 @@
 }
 .form-wrapper.show {
     display: block;
+}
+
+
+#editor-section {
+    /* padding: 2.5% */
+}
+
+.editor-section-title { 
+    margin-bottom: 5%;
+}
+
+
+#editor-section form .input-col {
+    padding: 0% 5% 0% 0%;
+}
+
+#editor-section .editor-form-section {
+    margin: 10% 0%;
+}
+
+#editor-section h2 { 
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+#editor-section label { 
+    font-size: 0.8em;
+    font-weight: 400;
+    color: rgb(153, 153, 153);
+}
+
+#editor-section input {
+    background-color: rgba(221, 238, 248, 0.705);
+    border: none;
+    font-weight: 400;
+}
+
+.form-item {
+    padding: 2%;
+    margin-bottom: 2%;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 5px;
+}
+
+.add-item-button {
+    font-weight: 400;
+    margin: 1% 0;
+}
+
+.form-item-title {
+    font-size: 1em;
+}
+
+.hovered {
+    color: indigo;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.MuiSvgIcon-root.side-item {
+    display: none;
+   color: rgb(201, 201, 201);
+}
+
+.MuiSvgIcon-root.side-item.showing {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.MuiSvgIcon-root.side-item.hovered {
+    font-weight: 500;
+    color: indigo;
+}
+
+ /* Profile Section Settings  */
+
+ #editor-section .col-lg-10{
+    padding: 0;
+}
+
+#profile-description-form-section {
+    margin-top: 5%;
+}
+
+/* Employment Settings  */
+
+
+
+/* Visualizer  */
+
+#zoom-out-editor-icon-container {
+    position: absolute;
+    z-index: 99999; 
+    top: 48%;
+    left: 48%;
+    background-color: indigo;
+    border-radius: 50%;
+    padding: 5px;
+    transform: scale(0);
+    transition: transform 0.5s ease 0s;
+}
+
+#zoom-out-editor-icon-container.show {
+    position: absolute;
+    z-index: 99999; 
+    top: 45%;
+    left: 45%;
+    background-color: indigo;
+    border-radius: 50%;
+    padding: 5px;
+    transform: scale(1);
+    transition: transform 0.5s ease 0s;
+
+}
+
+#zoom-out-editor-icon {
+    display: none;
+    font-size: 100%;
+    color: white;
+}
+
+#zoom-out-editor-icon.show {
+    display: block;
+    font-size: 300%;
 }

@@ -3,6 +3,8 @@ const Schema = mongoose.Schema
 
 const cvSchema = new Schema({
     name: String,
+    // color: [String],
+    color: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -16,8 +18,6 @@ const cvSchema = new Schema({
         phone: String,
         profilePicture: String,
         profileDescription: [{}],
-        
-
     },
     employment: [{
         title: String,

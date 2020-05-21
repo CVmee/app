@@ -3,11 +3,14 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Miniatures from './Miniatures/Miniatures'
 
 import Navigation from '../../ui/navbar/Navbar'
 
 import UserService from '../../../service/user.service'
 import { Switch, Route, Link, Redirect } from 'react-router-dom'
+
+import './Profile.css'
 
 class Profile extends Component {
 
@@ -63,26 +66,24 @@ class Profile extends Component {
             this.state.createdCV
                 ? <Redirect to={`/cv/${this.state.createdCV._id}/edit`} />
                 : <>
-                    <Navigation setTheUser={this.props.setTheUser} loggedInUser={this.props.loggedInUser} />
-                    <Container>
+                    <Container id='profile-container'>
                         <Row>
                             <Col>
                                 {this.state.userAction === 'dashboard' ? <h1>Dashboard</h1> : <h1>Templates</h1>}
                             </Col>
                             <Col lg="2">
-                                {
-                                    this.state.userAction === 'dashboard'
-                                        ? <Button onClick={this.browseTemplates}> + New CV </Button>
-                                        : <Button onClick={this.browseDashboard}> Dashboard </Button>
-                                }
+                                <Button variant='info' onClick={this.browseTemplates}> + New CV </Button>
+                            </Col>
+                            <Col lg="2">
+                                <Link to='/userDetails'><Button variant='light'> Update Profile </Button></Link>
                             </Col>
                         </Row>
                         <hr></hr>
                         <Row>
                             {
                                 this.state.userAction === 'dashboard'
-                                    ? this.state.cvs && this.state.cvs.map((cv, index) => <Col key={index} lg="6"> <Link to={`/cv/${cv._id}/edit`}><Button key={cv._id}>{cv.name}</Button> </Link></Col>)
-                                    : this.state.templates.map((template, index) => <Col key={index} lg="6"> <Button onClick={() => this.createCV(template.name, this.props.loggedInUser._id)} key={template._id}>{template.name}</Button> </Col>)
+                                    ? this.state.cvs && this.state.cvs.map((cv, index) => <Col key={index} lg="4"> <Link to={`/cv/${cv._id}/edit`}><div className='miniature-container'><Miniatures className='miniature-model' model={cv.name} key={cv._id}></Miniatures></div> </Link></Col>)
+                                    : this.state.templates.map((template, index) => <Col key={index} lg="6"> <div onClick={() => this.createCV(template.name, this.props.loggedInUser._id)} className='miniature-container'><Miniatures className='miniature-model' model={template.name}  key={template._id}>{template.name}</Miniatures></div> </Col>)
                             }
                         </Row>
                     </Container>

@@ -62,12 +62,6 @@ class Apollo extends Component {
 
     componentDidMount = () => this.setInitialInfo()
 
-    // Need to add Eventlistener to Window.resize
-    // componentDidUpdate = () => {
-    //     this.state.profileDescriptionHTML = []
-    //     this.state.cvInfo.userInfo.profileDescription.map(node => this.state.profileDescriptionHTML.push(this.serialize(node)))
-    // }
-
     componentDidUpdate = (prevProps, prevState) => {
         if (prevProps !== this.props) {
             const newDescription = []
@@ -76,19 +70,12 @@ class Apollo extends Component {
         }
     }
 
-    // componentWillReceiveProps = (nextProps) => {
-    //     const newDescription = []
-    //     nextProps.cvInfo.userInfo.profileDescription.map(node => newDescription.push(this.serialize(node)))
-    //     this.setState({ cvInfo: nextProps.cvInfo, profileDescriptionHTML: newDescription })
-    // }
-
     serialize = node => {
         if (Text.isText(node)) {
             return escapeHtml(node.text)
         }
 
         const children = node.children.map(n => this.serialize(n)).join('')
-
 
         switch (node.type) {
             case 'paragraph':
@@ -254,7 +241,7 @@ class Apollo extends Component {
                                 <div className='section-info'>
                                     {this.state.cvInfo.links.map((link, index) => {
                                         return (
-                                            <Row className='link-item' key={index}><a className='links-item-label' href={link.link} key={index} style={this.state.paragraphStyle}>{link.label}</a></Row>
+                                            <Row className='link-item' key={index}><a className='links-item-label' href={link.link} key={index} style={this.state.paragraphStyle, {color: this.state.cvInfo.color}}>{link.label}</a></Row>
                                         )
                                     })}
                                 </div>
