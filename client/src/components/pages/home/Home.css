@@ -1,0 +1,37 @@
+#home-main {
+    text-align: center;
+    height: 100vh;
+    background-color: rgb(231, 231, 255);
+}
+
+#home-main  h1 {
+    padding: 4%;
+    font-size: 4em;
+    text-align: center;
+    font-weight: 500;
+}
+
+#home-main  h2{
+    padding: 0 2% 2.5% 2%;
+    font-weight: 500;
+}
+
+#home-main  .underscore{
+    text-decoration: underline #ffc107;
+}
+
+#home-main #specs {
+    display: flex;
+    justify-content: center;
+}
+
+#home-main a {
+    display: block;
+    text-align: center;
+}
+
+#home-main img {
+    width: 100%;
+    margin-top: 10%;
+    border-radius: 5px;
+}
