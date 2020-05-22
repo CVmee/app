@@ -9,8 +9,8 @@ const CV = require('../models/cv.model')
 const Template = require('../models/template.model')
 const Description = require('../models/description.model')
 
-//mongoose.connect(`mongodb+srv://${process.env.MONGODBUSER}:${process.env.MONGODBPASSWORD}@damagesound-t1udi.gcp.mongodb.net/${process.env.DB}`, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.connect(`mongodb://localhost/${process.env.LOCALDB}`, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
+// mongoose.connect(`mongodb://localhost/${process.env.LOCALDB}`, { useNewUrlParser: true, useUnifiedTopology: true })
 
 
 const bcrypt = require("bcrypt")
@@ -109,7 +109,6 @@ const createCVs = (user) => {
     cvs.push(
         {
             name: 'Apollo',
-            // color: ['#000000', '#ffffff'],
             color: '#ffffff',
             employment: employment,
             education: education,
@@ -128,7 +127,6 @@ const createCVs = (user) => {
         },
         {
             name: "Poseidon",
-            // color: ['#000000', '#ffffff'],
             color: '#ffffff',
             employment: employment,
             education: education,
