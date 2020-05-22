@@ -1,57 +1,59 @@
 import React, { Component } from 'react'
-import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
-
 import EmploymentInfoForm from './EmploymentInfoForm'
+import CVService from '../../../../../service/cv.service'
+import { mouseEnterAddButton, mouseLeaveAddButton } from '../../../../../clientEvents/editorEvents'
 
-import UserService from '../../../../../service/user.service'
-import { Switch, Route, Link, Redirect } from 'react-router-dom'
 
 class EmploymentInfo extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            user: this.props.loggedInUser,
-            cvInfo: this.props.cvInfo,
-            employmentInfo: this.props.cvInfo.employment,
-            // userAction: 'edition'
-        }
-        this.userService = new UserService()
-        // this.cvService = new UserService()
+        this.state = { employment: this.props.employment }
+        this.cvService = new CVService()
     }
 
+    componentDidUpdate = (prevProps) => prevProps !== this.props && this.setState({ employment: this.props.employment })
+
     updateEmploymentInfo = (index, info) => {
-        console.log('before')
-        console.log(this.state.employmentInfo)
-        console.log('after')
-        console.log(this.state.employmentInfo)
-        this.state.employmentInfo[index] = info
-        const newEmploymentInfo = this.state.employmentInfo
-        this.state.cvInfo = { ...this.state.cvInfo, employment: newEmploymentInfo }
-        console.log('THIS IS THE NEW STATE')
-        console.log(this.state.cvInfo);
-        this.props.updateCVInfo(this.state.cvInfo)
+        const newEmploymentInfo = [...this.state.employment]
+        newEmploymentInfo[index] = info
+        this.setState({ employment: newEmploymentInfo }, () => {
+            this.props.updateCVInfo(this.state.employment, 'employment')
+        })
     }
 
     render() {
         return (
-            <Container>
-                {/* <h1 id="editor-user-title">{this.state.cvInfo.title}, {this.state.cvInfo.firstName} {this.state.cvInfo.lastName}</h1>            */}
-                <h2 className="editor-section-title">Employment Info</h2>
-                {this.state.employmentInfo.map((employment, index) =>
+            <section className='editor-form-section'>
+
+                <Col lg={{ span: 10, offset: 1 }}>
+                    <h2 className="editor-section-title">Employment Info</h2>
+                </Col>
+                {this.state.employment && this.state.employment.map((employment, index) =>
                     <EmploymentInfoForm
                         {...this.props}
-                        {...this.state.cvInfo}
-                        // updateCVInfo={this.props.updateCVInfo}
                         employment={employment}
                         key={index}
                         index={index}
                         updateEmploymentInfo={this.updateEmploymentInfo}
+                        deleteElement={this.props.deleteElement}
                     />)}
-            </Container>
+                <Container>
+                    <Col lg={{ offset: 1 }}>
+                        <p
+                            id="add-employment-button"
+                            className='add-item-button'
+                            onClick={() => this.props.createNewElement('employment')}
+                            onMouseEnter={() => mouseEnterAddButton('employment')}
+                            onMouseLeave={() => mouseLeaveAddButton('employment')}
+                        >+ Add Employment
+                        </p>
+                    </Col>
+                </Container>
+
+            </section>
         )
     }
 }

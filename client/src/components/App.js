@@ -11,6 +11,11 @@ import Signup from './pages/signup/Signup'
 import Login from './pages/login/Login'
 import Profile from './pages/profile/Profile'
 import CV from './pages/cv/CV'
+import Template from './pages/cv/Template/Template'
+import OnlineCV from './pages/cv/OnlineCV/OnlineCV'
+import UserDetails from './pages/profile/UserDetails'
+
+import Gallery from './pages/gallery/Gallery'
 
 import AuthService from './../service/auth.service'
 
@@ -40,21 +45,25 @@ class App extends Component {
         this.fetchUser()
 
         return (
-            <>
+            <main>
                 <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
 
-                <main>
+                {this.state.loggedInUser && !this.state.loggedInUser.firstName && <Redirect to="/userDetails" />}
 
-                    <Switch>
-                        <Route path="/" exact render={() => <Home loggedInUser={this.state.loggedInUser} />} />
-                        <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />
-                        <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />
-                        <Route path="/profile" render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
-                        <Route path="/cv/:id/edit" exact render={(props) => this.state.loggedInUser ? <CV {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
-                    </Switch>
+                <Switch>
+                    <Route path="/" exact render={props => <Home {...props} setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />} />
+                    <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />
+                    <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />
+                    <Route path="/profile" render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
+                    <Route path="/cv/:id/edit" exact render={(props) => this.state.loggedInUser ? <CV {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
+                    <Route path='/cv/:id/templates' exact render={(props) => true ? <Template {...props} loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
+                    <Route path='/cv/:id' exact render={props => <OnlineCV {...props} />} />
+                    <Route path="/gallery" render={props => <Gallery {...props} setTheUser={this.setTheUser} />} />
+                    <Route path="/userDetails" render={props => <UserDetails {...props} userInfo={this.state.loggedInUser} />} />
 
-                </main>
-            </>
+                </Switch>
+
+            </main>
         )
     }
 }

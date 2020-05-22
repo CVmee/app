@@ -3,6 +3,8 @@ const Schema = mongoose.Schema
 
 const cvSchema = new Schema({
     name: String,
+    // color: [String],
+    color: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -15,7 +17,7 @@ const cvSchema = new Schema({
         password: String,
         phone: String,
         profilePicture: String,
-        profileDescription: String,
+        profileDescription: [{}],
     },
     employment: [{
         title: String,
@@ -23,7 +25,7 @@ const cvSchema = new Schema({
         start: String,
         end: String,
         city: String,
-        description: String,
+        description: [{}],
     }],
     education: [{
         degree: String,
@@ -31,14 +33,18 @@ const cvSchema = new Schema({
         start: String,
         end: String,
         city: String,
-        description: String,
+        description: [{}],
+    }],
+    skills: [{
+        skill: String,
+        level: Number,
     }],
     links: [{
         label: String,
         link: String,
-    }]
+    }],
 }, {
-    timestamps: true
+    timestamps: true,
 })
 
 const CV = mongoose.model("CV", cvSchema)

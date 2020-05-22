@@ -35,10 +35,12 @@ router.post('/signup', (req, res, next) => {
 
         const salt = bcrypt.genSaltSync(10);
         const hashPass = bcrypt.hashSync(password, salt);
+        const profileDescription= [{ "type": "paragraph", "children": [{ "text": "" }] }]
 
         const aNewUser = new User({
             email: email,
-            password: hashPass
+            password: hashPass,
+            profileDescription,
         });
 
         aNewUser.save(err => {

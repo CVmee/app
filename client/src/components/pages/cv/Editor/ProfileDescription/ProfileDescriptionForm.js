@@ -17,14 +17,14 @@ class ProfileDescriptionForm extends Component {
             autoSaveInterval: undefined, // Unnecessary
             user: this.props.loggedInUser,
             cvID: this.props.match.params.id,
-            cvInfo: this.props.cvInfo, // Probably Unnecessary
-            firstName: this.props.cvInfo.userInfo.firstName,
-            lastName: this.props.cvInfo.userInfo.lastName,
-            title: this.props.cvInfo.userInfo.title,
-            email: this.props.cvInfo.userInfo.email,
-            phone: this.props.cvInfo.userInfo.phone,
-            profilePicture: this.props.cvInfo.userInfo.profilePicture,
-            profileDescription: this.props.cvInfo.userInfo.profileDescription, // Probably Unnecessary
+            cvInfo: this.props.cvInfo, // Probably Unnecessary,
+            // firstName: this.props.cvInfo.userInfo.firstName,
+            // lastName: this.props.cvInfo.userInfo.lastName,
+            // title: this.props.cvInfo.userInfo.title,
+            // email: this.props.cvInfo.userInfo.email,
+            // phone: this.props.cvInfo.userInfo.phone,
+            // profilePicture: this.props.cvInfo.userInfo.profilePicture,
+            // profileDescription: this.props.cvInfo.userInfo.profileDescription, // Probably Unnecessary
 
             // userAction: 'edition'
 
@@ -35,9 +35,8 @@ class ProfileDescriptionForm extends Component {
 
     handleInputChange = event => {
         const { name, value } = event.target
-        this.state[name] = value
-        const { firstName, lastName, title, email, phone, profilePicture, profileDescription } = this.state
-        this.props.updateCVInfo({ firstName, lastName, title, email, phone, profilePicture, profileDescription })
+        this.state.cvInfo.userInfo[name] = value
+        this.props.updateCVInfo(this.state.cvInfo)
     }
 
     render() {
@@ -47,7 +46,7 @@ class ProfileDescriptionForm extends Component {
                     <Col>
                         <Form.Group controlId="profileDescription">
                             <Form.Label>Describe yourself in 3 sentences</Form.Label>
-                            <Form.Control name="profileDescription" type="text" value={this.state.profileDescription} onChange={this.handleInputChange} />
+                            <Form.Control name="profileDescription" type="text" value={this.state.cvInfo.userInfo.profileDescription} onChange={this.handleInputChange} />
                         </Form.Group>
                     </Col>
 

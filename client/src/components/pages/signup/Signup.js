@@ -7,6 +7,8 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+import Navigation from '../../ui/navbar/Navbar'
+
 import { Link } from 'react-router-dom'
 
 
@@ -50,39 +52,42 @@ class Signup extends Component {
     render() {
 
         return (
-            <Container>
+            <>
+                
+                <Container>
 
-                <Row>
-                    <Col md={{ span: 4, offset: 4 }}>
+                    <Row>
+                        <Col md={{ span: 4, offset: 4 }}>
 
-                        <h3>Sign Up</h3>
-                        <hr></hr>
-                        <Form onSubmit={this.handleSubmit}>
+                            <h3>Sign Up</h3>
+                            <hr></hr>
+                            <Form onSubmit={this.handleSubmit}>
 
-                            <Form.Group controlId="name">
-                                <Form.Label>E-mail</Form.Label>
-                                <Form.Control name="email" type="text" value={this.state.email} onChange={this.handleInputChange} />
-                            </Form.Group>
+                                <Form.Group controlId="name">
+                                    <Form.Label>E-mail</Form.Label>
+                                    <Form.Control name="email" type="text" value={this.state.email} onChange={this.handleInputChange} />
+                                </Form.Group>
 
-                            <Form.Group controlId="pwd">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
-                            </Form.Group>
+                                <Form.Group controlId="pwd">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
+                                </Form.Group>
 
-                            <p
-                                className='error-message'
-                                style={{ display: this.state.errorMessage ? 'block' : 'none' }}
-                            >{this.state.errorMessage}</p>
+                                <p
+                                    className='error-message'
+                                    style={{ display: this.state.errorMessage ? 'block' : 'none' }}
+                                >{this.state.errorMessage}</p>
 
-                            <Button variant="dark" type="submit">Sign Up</Button>
-                        </Form>
+                                <Button variant="dark" type="submit">Sign Up</Button>
+                            </Form>
 
-                        <p><small>Already have an account? <Link to="/login">Log In</Link></small></p>
+                            <p><small>Already have an account? <Link to="/login">Log In</Link></small></p>
 
-                    </Col>
-                </Row>
+                        </Col>
+                    </Row>
 
-            </Container>
+                </Container>
+            </>
         )
     }
 }

@@ -9,7 +9,7 @@ console.log('hola_')
 export default class AuthService {
     constructor() {
         this.service = axios.create({
-            baseURL: '/juju',
+            baseURL: process.env.REACT_APP_API_URL,
             withCredentials: true
         })
     }

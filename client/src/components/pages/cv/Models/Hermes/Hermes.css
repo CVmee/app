@@ -1,0 +1,117 @@
+/* General */
+#hermes-cv-container {
+    background-color: white;
+    margin: 2.5% 5%;
+    border-radius: 5px;
+    height: 95%;
+    width: 90%;
+    padding: 0%
+}
+
+#hermes-cv-container .left-side {
+    color: white;
+}
+
+
+/* Left Side  */
+#hermes-cv-container .left-side, .right-side {
+    width: 100%;
+    padding-top: 50px;
+}
+
+#hermes-cv-container .left-side p, a {
+    margin-bottom: 0;
+}
+
+#hermes-cv-container .left-side section {
+    margin-bottom: 50px;
+}
+
+
+#hermes-cv-container #picture-row {
+    width: 100%;
+    /* margin: 50px 0% 2% 0%; */
+}
+
+#hermes-cv-container .left-side .section-title {
+    margin-bottom: 5px;
+}
+
+#hermes-cv-container .left-side .section-info {
+    text-align: right;
+}
+
+#hermes-cv-container .profile-name-picture-section {
+    margin-bottom: 30px;
+}
+
+#hermes-cv-container .details-section .title-col {
+    padding-right: 0;
+}
+
+#hermes-cv-container .left-side .hr-col  {
+    vertical-align: middle;
+}
+
+#hermes-cv-container .left-side .hr-col hr {
+    /* margin-top: 10%; */
+    margin-left: 0;
+    padding-left: 0;
+    vertical-align: middle;
+    border: 1px solid white;
+
+}
+
+
+
+#hermes-cv-container #picture-row img {
+    width: 100%;
+    height: 100%;
+    border: 4px solid white;
+    border-radius: 50%;
+}
+
+#hermes-cv-container .profile-title-col {
+    text-align: center;
+    font-weight: 400;
+}
+
+#hermes-cv-container #profile-user-name {
+    /* font-size: 1.2em; */
+    font-weight: 500;
+}
+
+/* Right Side */
+#hermes-cv-container .title {
+    font-weight: 500;
+}
+
+#hermes-cv-container .education-item-date, .employment-item-date {
+    font-weight: 400;
+}
+
+#hermes-cv-container .education-item .col-lg-9 {
+    padding: 0;
+}
+
+#hermes-cv-container .employment-item .col-lg-9 {
+    padding: 0;
+}
+
+/* Profile */
+#hermes-cv-container #profile-row {
+}
+
+/* #hermes-cv-container #profile-row #profile-icon{
+    font-size: 1em;
+} */
+
+#hermes-cv-container #profile-row #profile-section-title{
+    /* font-size: 1.5em; */
+}
+
+ /* Education  */
+#hermes-cv-container .education-item-date, .employment-item-date {
+    margin-top: -2%;
+    margin-bottom: 1%;
+}

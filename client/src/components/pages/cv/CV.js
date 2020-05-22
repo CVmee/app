@@ -17,18 +17,15 @@ class CV extends Component {
         super(props)
         this.state = {
             user: this.props.loggedInUser,
-            userAction: 'edition',
+            userAction: 'edition', // Esto se puede hacer también con un botón que tire de redirect
             cvID: this.props.match.params.id,
         }
         this.userService = new UserService()
     }
 
+
     render() {
-        return (
-            this.state.userAction === 'edition'
-                ? <Editor {...this.props} cvID={this.state.cvID} cvInfo={this.state.cvInfo}/>
-                : <Template {...this.props} />
-        )
+        return <Editor {...this.props} cvID={this.state.cvID} cvInfo={this.state.cvInfo} />
     }
 }
 
