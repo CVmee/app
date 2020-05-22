@@ -1,11 +1,5 @@
 import axios from 'axios'
 
-console.log(axios.defaults.baseURL)
-console.log(axios.defaults.baseURL)
-
-const joder = process.env.REACT_APP_URL
-console.log('JODER', joder)
-console.log('hola_')
 export default class AuthService {
     constructor() {
         this.service = axios.create({
