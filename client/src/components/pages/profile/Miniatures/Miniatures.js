@@ -15,9 +15,8 @@ const Miniatures = (props) => {
         case 'Hermes':
            return <img src={Hermes} alt="Hermes model" />
 
-        
         default:
-            break;
+            return <></>
     }
 }
 
