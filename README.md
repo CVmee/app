@@ -22,9 +22,86 @@ It's plain simple!
 
 ## Client Side
 
+### React Router Routes
+
+| Path | Component | Access | Description |
+| ---| -------| -----| ------------|
+| / | Home    | /    | All agents |  Landing Page 
+| /singup | Signup    | Non-users only    | Signup form. Once singed up, automatically logs the user in | 
+| /login |  Login   | All agents    | Login form, link to signup, navigate to dashboard after login if user is logged in. | 
+| /profile | Profile   | Logged in users only   | Shows all CVs created by the user and a buttons to update profile info and create new CVs. | 
+| /cv/:id/edit | CV    | Logged in users only   | Shows an specific CV based on :id URL param and displays a CV editor | 
+| /cv/:id/templates | Templates    | Logged in users only    | Shows an specific CV based on :id URL param and displays all the available templates to choose from | 
+| /cv/:id |  OnlineCV   | All agents | Shows an specific CV based on :id URL and displays it in the browser| 
+
+
 ## Server Side
 
 ### Models
+
+#### User
+```javascript
+{
+    firstName: String,
+    lastName: String,
+    title: String,
+    email: String,
+    password: String,
+    phone: String,
+    profilePicture: String,
+    profileDescription: [{}],
+}, {
+    timestamps: true
+}
+```
+
+#### CV
+```javascript
+{
+    name: String,
+    color: String,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    userInfo: {
+        firstName: String,
+        lastName: String,
+        title: String,
+        email: String,
+        password: String,
+        phone: String,
+        profilePicture: String,
+        profileDescription: [{}],
+    },
+    employment: [{
+        title: String,
+        employer: String,
+        start: String,
+        end: String,
+        city: String,
+        description: [{}],
+    }],
+    education: [{
+        degree: String,
+        school: String,
+        start: String,
+        end: String,
+        city: String,
+        description: [{}],
+    }],
+    skills: [{
+        skill: String,
+        level: Number,
+    }],
+    links: [{
+        label: String,
+        link: String,
+    }],
+}, {
+    timestamps: true,
+}
+```
 
 ### API Endpoints
 
@@ -70,3 +147,14 @@ post    | /api/cvs/deleteEmployment/:id  | Commands the server to delete a new E
 post    | /api/cvs/deleteSkill/:id    | Commands the server to delete a new Skill Item related to an specific CV based on :id URL param. | 
 post   | /api/cvs/deleteLink/:id   | Commands the server to delete a new Link Item related to an specific CV based on :id URL param. | 
 post   | /api/cvs/changeTemplate/:id   | Commands the server to change an specific CV's template based on :id URL param. | 
+
+
+## Built with :heart: and
+
+* React
+* MongoDB
+* Mongoose
+* Express
+
+## Created By
+**[Gerardo Toledo](https://www.linkedin.com/in/gerardo-toledo/)**
