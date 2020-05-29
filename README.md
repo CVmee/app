@@ -3,7 +3,7 @@
 ## What is it?
 A **Fast**, **Simple** and **Free** app that will build you a good styled CV that will help you get your dream job.
 
-You can try the app **[here](http://cvmee.herokuapp.com/)**
+**You can try the app :point_right: [here](http://cvmee.herokuapp.com/)** :point_left:
 
 **Disclaimer**: this is still a work in progress. Expect some buggy behaviour while I build things up.
 
