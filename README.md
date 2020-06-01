@@ -19,6 +19,7 @@ It's plain simple!
 * **Modify CV**: There's no need to be so dramatic: you can always change them instead of deleting them!
 * **Share CV**: Share them via link. Forget format incompatibilities: the web is open to anyone and any device!
 * **Download CV**: Looking for a more formal way of presenting yourself? Download the classic PDF format!
+* **Autosave**: This app was thought as a costumer-centric UX, so there are no "save" buttons in any form: the data just gets autosaved when the user types any changes, coping server-performance and UX.
 
 ## Client Side
 
