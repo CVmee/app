@@ -5,7 +5,7 @@ A **Fast**, **Simple** and **Free** app that will build you a good styled CV tha
 
 **You can try the app :point_right: [here](http://cvmee.herokuapp.com/)** :point_left:
 
-**Disclaimer**: this is still a work in progress. Expect some buggy behaviour while I build things up.
+**Disclaimer**: this is still a work in progress. Expect some buggy behaviour/styling while I build things up.
 
 ## What can it do?
 
